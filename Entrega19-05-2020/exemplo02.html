@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Place Searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        /*
+        URL 
+            https://maps.googleapis.com/maps/api/place/textsearch/json?query=pontos+turísticos&location=-30.3675294,-50.186966&radius=10000&key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY
+
+        */
+        #map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+
+        var map;
+        var service;
+        var infowindow;
+
+
+        var getDistance = function (lat1, lon1, lat2, lon2) {
+            var deg2rad = 0.017453292519943295; // === Math.PI / 180
+            var cos = Math.cos;
+            lat1 *= deg2rad;
+            lon1 *= deg2rad;
+            lat2 *= deg2rad;
+            lon2 *= deg2rad;
+            var diam = 12742; // Diameter of the earth in km (2 * 6371)
+            var dLat = lat2 - lat1;
+            var dLon = lon2 - lon1;
+            var a = ((1 - cos(dLat)) +
+                (1 - cos(dLon)) * cos(lat1) * cos(lat2)
+            ) / 2;
+
+            return diam * Math.asin(Math.sqrt(a)) * 1000;
+        };
+
+        function initMap() {
+
+            let getLocation = function () {
+                // inicia a variavel que vai pegar as coordenadas
+                let coordinates = { lat: 0, lng: 0 };
+                if (navigator.geolocation) {
+                    //passa o valor para as coordenadas
+                    return navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    return;
+                }
+            }
+            // isso sempre vai ocorrer quando iniciar a página. No caso do App inciaria sempre que o APP fosse aberto e a pessoa quisesse procurar um lugar 
+            window.onload = getLocation
+
+            function showPosition(position) {
+                //as coordenadas serão setadas aqui, já que foram pegas as coordenadas locais
+                coordinates = { lat: position.coords.latitude, lng: position.coords.longitude }
+                console.log(coordinates)
+                // seta as coordenadas de acordo com o objeto do google. 
+                var currentLocation = new google.maps.LatLng(coordinates.lat, coordinates.lng);
+
+                infowindow = new google.maps.InfoWindow();
+                //aqui inicia o mapa, onde ele será renderizado na tela
+                map = new google.maps.Map(
+                    document.getElementById('map'),
+                    { center: new google.maps.LatLng({ lat: -29.9959280, lng: -51.109997 }), zoom: 15 });
+
+                
+   // NO -30.035751, -51.222606
+        
+                debugger; 
+                var bounds = map.getBounds();
+                google.maps.event.addListenerOnce(map, 'idle', function(){
+                // SW -30.0470423,-51.2019747,17
+                var makeBounds = new google.maps.LatLngBounds(
+                        new google.maps.LatLng( -30.035751, -51.222606),
+                        new google.maps.LatLng(-30.0470423,-51.2019747,17)
+                    );
+
+                map.fitBounds(makeBounds)
+                        
+                    var request = {
+                    bounds:map.getBounds(),
+                    keyword:  ['pontos turísticos']
+                };
+                // instancia o serviço 
+                service = new google.maps.places.PlacesService(map);
+                // faz a busca propriamente dita 
+                service.nearbySearch(request, function (results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) {
+                            createMarker(results[i]);
+                        }
+                        map.setZoom(14);
+                        map.setCenter(results[10].geometry.location);
+                    }
+                });
+            });
+            }
+            function createMarker(place) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent(place.name);
+                    infowindow.open(map, this);
+                });
+            }
+        }
+        // fazer 
+    </script>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
+

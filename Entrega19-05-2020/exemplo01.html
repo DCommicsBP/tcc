@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Place Searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        /*
+        URL 
+            https://maps.googleapis.com/maps/api/place/textsearch/json?query=pontos+turísticos&location=-30.3675294,-50.186966&radius=10000&key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY
+
+        */
+        #map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+
+        var map;
+        var service;
+        var infowindow;
+
+        function initMap() {
+            
+            let getLocation = function () {
+            // inicia a variavel que vai pegar as coordenadas
+            let coordinates = {lat:0, lng:0};
+            if (navigator.geolocation) {
+                //passa o valor para as coordenadas
+                return navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                return;
+            }
+        }
+        // isso sempre vai ocorrer quando iniciar a página. No caso do App inciaria sempre que o APP fosse aberto e a pessoa quisesse procurar um lugar 
+        window.onload = getLocation
+
+        function showPosition(position) {
+            //as coordenadas serão setadas aqui, já que foram pegas as coordenadas locais
+            coordinates = { lat: position.coords.latitude, lng: position.coords.longitude }
+            console.log(coordinates)
+            // seta as coordenadas de acordo com o objeto do google. 
+            var currentLocation = new google.maps.LatLng(coordinates.lat, coordinates.lng);
+
+            infowindow = new google.maps.InfoWindow();
+            //aqui inicia o mapa, onde ele será renderizado na tela
+            map = new google.maps.Map(
+                document.getElementById('map'), 
+                { center: currentLocation, zoom: 15 });
+
+              //  var service = new google.maps.DistanceMatrixService();
+             // ver se tem determinado uma palavra reservada pra categorizar pontos turisticos
+                var request = {
+                    location: currentLocation,
+                    radius: '5000',
+                    keyword:  ['school'], 
+                    fields: ['name', 'formatted_address', 'geometry', 'rating',
+              'website', 'photos']
+                };
+
+                // instancia o serviço 
+            service = new google.maps.places.PlacesService(map);
+                // faz a busca propriamente dita 
+            service.nearbySearch(request, function (results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        debugger;
+                        createMarker(results[i]);
+                    }
+
+                    map.setCenter(results[0].geometry.location);
+                }
+            });
+        }
+
+        function createMarker(place) {
+            debugger; 
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                 
+                content = `Lugar: ${place.name} \n
+                           Posição: Lat: ${place.geometry.location.lat()} Lng: ${place.geometry.location.lng()}`; 
+
+                infowindow.setContent(content);
+                infowindow.open(map, this);
+            });
+        }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY&libraries=places&callback=initMap" async
+        defer></script>
+</body>
+
+</html>

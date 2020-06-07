@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script>
+        let getLocation = function () {
+
+            let coordinates = {};
+
+
+            if (navigator.geolocation) {
+                return navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                return
+            }
+        }
+
+
+        window.onload = getLocation
+
+        function showPosition(position) {
+            coordinates = { lat: position.coords.latitude, lng: position.coords.longitude }
+            //maps.googleapis.com/maps/api/place/textsearch/json?query=pontos+turísticos&location=-30.3675294,-50.186966&radius=10000&key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY
+            console.log(coordinates)
+
+            let radius = 10000;
+            let query = 'pontos+turísticos';
+            let key = 'AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY';
+            let body1 = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=';
+            let body = `${body1}${query}&location=${coordinates.lat},${coordinates.lng}&radius=${radius}&key=${key}`;
+            let body2 = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=pontos+turísticos&location=-30.3675294,-50.186966&radius=1000&key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY`;
+
+
+            let h = new Headers();
+            h.append('Accept', 'application/json');
+            h.append('Access-Control-Allow-Origin', '*')
+            
+            let req = new Request(body2, {
+                method: 'GET',
+                headers: h,
+                mode: 'cors'
+            });
+            
+            fetch(body2, req)
+            .then((response)=>{
+                if(response.ok){
+                    return response.json();s
+                }else{
+                    throw new Error('BAD HTTP stuff');
+                }
+            })
+            .then( (jsonData) =>{
+                console.log(jsonData);
+                p.textContent = JSON.stringify(jsonData, null, 4);
+            })
+            .catch( (err) =>{
+                console.log('ERROR:', err.message);
+            });
+        }
+            
+    </script>
+
+</body>

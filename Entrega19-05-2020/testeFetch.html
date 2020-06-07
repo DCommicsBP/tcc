@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch with CORS</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        p{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fetch with CORS</h1>
+    </header>
+    <main>
+        <p onclick="doFetch()">Response will appear here after you click.</p>
+    </main>
+    <script>
+        let p;
+        
+      
+        function doFetch(ev){
+            let uri = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=pontos+turísticos&location=-30.3675294,-50.186966&radius=10000&key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY";
+         
+
+
+
+        fetch("https://cors-anywhere.herokuapp.com/" + uri)
+        .then(res =>{
+            debugger; s
+            if(res.ok){
+                debugger; 
+                return res.json();
+            }else{
+                throw new Error(); 
+            }    
+        })
+        .then(jsonData=>{
+
+        })
+        .catch(error=>{
+
+        })
+       
+        }
+    </script>
+</body>
+</html>

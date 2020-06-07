@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let body2 = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=pontos+turísticos&location=-30.3675294,-50.186966&radius=10000&key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY`;
+
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = "https://example.com"; // site that doesn’t send Access-Control-*
+fetch(proxyurl , body2) // https://cors-anywhere.herokuapp.com/https://example.com
+.then(response => response.text())
+.then(contents => console.log(contents))
+.catch(() => console.log("Can’t access " + body2 + " response. Blocked by browser?"))   </script>
+</body>
+</html>
