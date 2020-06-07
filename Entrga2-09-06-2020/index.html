@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY&libraries=directions,geometry,places&callback=initMap" async defer></script>
+<style type="text/css">
+    #map {
+        width: 500pt;
+        height: 350pt;
+        margin-top: 10px;
+        margin-left: 25%;
+    }
+</style>
+
+<body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+
+
+    <script>
+        var input = '';
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: -30.030194684981844,
+                    lng: -51.22252230705834
+                },
+                zoom: 16
+            });
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    map.setCenter(new google.maps.LatLng(pos.lat, pos.lng))
+                });
+            } else {
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+            input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+
+            });
+
+
+        }
+    </script>
+</body>
+
+</html>
