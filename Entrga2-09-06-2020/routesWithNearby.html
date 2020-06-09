@@ -38,22 +38,6 @@
                 zoom: 16
             });
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-                    map.setCenter(new google.maps.LatLng(pos.lat, pos.lng))
-                });
-            } else {
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
-
-
-
-
             directionsRenderer.setMap(map);
 
             routePositions = calculateAndDisplayRoute(directionsService, directionsRenderer, map);
@@ -69,13 +53,21 @@
                         directionsRenderer.setDirections(response);
                         routePositions = response.routes[0].overview_path;
 
-                        let j = 1; 
-                        routePositions.forEach(element => {
-                            console.log(`ELEMENTO NUMESO ${j} ===:>`, element)
-                            findNearbyPlaces(element)
-                            j++; 
-                        });
+                        let j = 1;
+                        let positionsIterate = []; 
 
+                        if(routePositions.length/1 >= 1){
+                            let space = routePositions.length/1; 
+                            for(let i =0; i <=1; i++){
+                                positionsIterate.push(routePositions[(parseInt(i*1))]); 
+                            }
+                        }
+
+                        debugger; 
+                        positionsIterate.forEach(element => {
+                            findNearbyPlaces(element)
+                            console.log("teste ==:>", element)
+                        });
 
                     } else {
                         window.alert('Directions request failed due to ' + status);
@@ -83,60 +75,55 @@
                     }
                 });
             }
-
             function findNearbyPlaces(element) {
-                    debugger; 
                 var request = {
-                    location: {lat: element.lat(), lng: element.lng()},
-                    radius: '5000',
+                    location: { lat: element.lat(), lng: element.lng() },
+                    radius: '10000',
                     keyword: ['bar'],
                     fields: ['name', 'formatted_address', 'geometry', 'rating',
                         'website', 'photos']
                 };
 
-                // instancia o serviço 
                 service = new google.maps.places.PlacesService(map);
-                // faz a busca propriamente dita 
-                service.nearbySearch(request, function (results, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i < results.length; i++) {
-                            routePlaces.push(results[i])
-                            
-                        }
-                        console.log('ROUTE PLACES ===>',routePlaces )
+                service.nearbySearch(request, nearbyCallback);
+            }
 
-                        routePlaces.forEach(element=>{
-                            createMarker(element)
-                        })
-
-                        map.setCenter(results[0].geometry.location);
-                    }
-                });
-
-                function createMarker(place) {
-                    debugger;
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: place.geometry.location
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        infoWindow = new google.maps.InfoWindow;
-                        content = `Lugar: ${place.name} \n
-                           Posição: Lat: ${place.geometry.location.lat()} Lng: ${place.geometry.location.lng()}`;
-
-                        infoWindow.setContent(content);
-                        infoWindow.open(map, this);
-                    });
+            function nearbyCallback(results, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach(element=>{
+                        
+                    })  
+                    
                 }
             }
 
+            function createMarkers(places) {
+                places.forEach(place => {
+                    let marker = new google.maps.Marker({
+                        position: place.geometry.location,
+                        map: map,
+                        title: place.name
+                    });
+
+                    google.maps.event.addListener(marker, 'click', () => {
+                        let request = {
+                            placeId: place.place_id,
+                            fields: ['name', 'formatted_address', 'geometry', 'rating',
+                                'website', 'photos']
+                        };
+
+                        service.getDetails(request, (placeResult, status) => {
+                            resultList.push(element)
+                            showDetails(placeResult, marker, status)
+                        });
+                    });
+
+                });
+
+            }
 
 
-
-
-
-        }
+            }
 
     </script>
 </head>
