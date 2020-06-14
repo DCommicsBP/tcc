@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Place Searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        /*
+        URL 
+            https://maps.googleapis.com/maps/api/place/textsearch/json?query=pontos+turísticos&location=-30.3675294,-50.186966&radius=10000&key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY
+
+        */
+        #map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        var infoWindow;
+        var routePositions = new Array();
+        var routePlaces = new Array();
+        var positionsIterate = []; 
+
+        function initMap() {
+
+            var directionsRenderer = new google.maps.DirectionsRenderer;
+            var directionsService = new google.maps.DirectionsService;
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: -30.030194684981844,
+                    lng: -51.22252230705834
+                },
+                zoom: 16
+            });
+
+            directionsRenderer.setMap(map);
+
+            routePositions = calculateAndDisplayRoute(directionsService, directionsRenderer, map);
+
+            function calculateAndDisplayRoute(directionsService, directionsRenderer, map) {
+                directionsService.route({
+                    origin: { lat: map.center.lat(), lng: map.center.lng() },  // Haight.
+                    destination: { lat: -30.1259199, lng: -51.4336658 },  // Ocean Beach.
+                    travelMode: google.maps.TravelMode["DRIVING"]
+                }, function (response, status) {
+                    console.log(status)
+                    console.log(response)
+                    if (status == 'OK') {
+                        console.log(response.routes[0].overview_path)
+                        directionsRenderer.setDirections(response);
+                        routePositions = response.routes[0].overview_path;
+
+                        let j = 1;
+
+                           let space = routePositions.length/10; 
+                            for(let i =0; i <10; i++){
+                                positionsIterate.push(routePositions[(parseInt(i*space))]); 
+                         }
+
+                        positionsIterate.forEach(element => {
+                            findNearbyPlaces(element)
+                            console.log("depois ==:>", element)
+
+                        });
+
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+
+                    }
+                });
+            }
+            function findNearbyPlaces(element) {
+                var request = {
+                    location: { lat: element.lat(), lng: element.lng() },
+                    radius: '2000',
+                    keyword: ['bar'],
+                    fields: ['name', 'formatted_address', 'geometry', 'rating',
+                        'website', 'photos']
+                };
+
+                service = new google.maps.places.PlacesService(map);
+                service.nearbySearch(request, nearbyCallback);
+            }
+
+            function nearbyCallback(results, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    
+                        createMarkers(results)   
+                    
+                }else{
+                    alert("Não deu")
+                    console.log(results)
+                    console.log(status)
+                }
+            }
+
+            function createMarkers(places) {
+                places.forEach(place => {
+                    let marker = new google.maps.Marker({
+                        position: place.geometry.location,
+                        map: map,
+                        title: place.name
+                    });
+
+                    google.maps.event.addListener(marker, 'click', () => {
+                        let request = {
+                            placeId: place.place_id,
+                            fields: ['name', 'formatted_address', 'geometry', 'rating',
+                                'website', 'photos']
+                        };
+
+                        service.getDetails(request, (placeResult, status) => {
+                            resultList.push(element)
+                            showDetails(placeResult, marker, status)
+                        });
+                    });
+
+                });
+
+            }
+
+
+            }
+
+    </script>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
