@@ -50,6 +50,35 @@
                 zoom: 16
             });
 
+
+            var getDistance = function (lat1, lon1, lat2, lon2) {
+                var deg2rad = 0.017453292519943295; // === Math.PI / 180
+                var cos = Math.cos;
+                lat1 *= deg2rad;
+                lon1 *= deg2rad;
+                lat2 *= deg2rad;
+                lon2 *= deg2rad;
+                var diam = 12742; // Diameter of the earth in km (2 * 6371)
+                var dLat = lat2 - lat1;
+                var dLon = lon2 - lon1;
+                var a = ((1 - cos(dLat)) +
+                    (1 - cos(dLon)) * cos(lat1) * cos(lat2)
+                ) / 2;
+
+                return diam * Math.asin(Math.sqrt(a)) * 1000;
+            };
+            var line = new google.maps.Polyline({
+                path: [
+                    new google.maps.LatLng(-30.1513006,-51.1637612,17),
+                    new google.maps.LatLng(-30.1247805, -51.106651)
+                ],
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 10,
+                map: map
+            });
+            
+            console.log(getDistance(-30.1226902,-51.178329, -30.1247805, -51.106651))
             directionsRenderer.setMap(map);
 
             routePositions = calculateAndDisplayRoute(directionsService, directionsRenderer, map);
@@ -57,8 +86,8 @@
             function calculateAndDisplayRoute(directionsService, directionsRenderer, map) {
 
                 directionsService.route({
-                    origin: { lat: map.center.lat(), lng: map.center.lng() },  // Haight.
-                    destination: { lat: -30.1259199, lng: -51.4336658 },  // Ocean Beach.
+                    origin: { lat: map.center.lat(), lng: map.center.lng() },  // Haight.-30.1554432,-51.1402308
+                    destination: { lat: -30.1554432, lng: -51.1402308 },  // Ocean Beach.
                     travelMode: google.maps.TravelMode["DRIVING"]
                 }, function (response, status) {
                     if (status == 'OK') {
@@ -78,6 +107,28 @@
                         });
 
 
+
+                        const dist = distances[0];
+                        let distanceAcc = 0;
+                        let pointsIterate = [];
+
+                        for (let i = 0; i < distances.length; i++) {
+                            let element = distances[i];
+                            steps.forEach(step => {
+                                distanceAcc += step.distance.value;
+
+                                if (distanceAcc >= element && element < distanceAcc) {
+
+                                    let point = { lat: step.start_point.lat(), lng: step.start_point.lng() };
+
+                                    pointsSearch.push(point)
+                                }
+                            })
+                        }
+
+
+
+                        /*
                         const dist = distances[0];
                         let distanceAcc = 0;
                         let pointsIterate = [];
@@ -97,19 +148,13 @@
                                 }
                             }
 
-                        }
+                        }*/
 
                         directionsRenderer.setDirections(response);
                         routePositions = response.routes[0].overview_path;
 
-                        let j = 1;
 
-                        let space = routePositions.length / 5;
-                        for (let i = 0; i < 4; i++) {
-                            positionsIterate.push(routePositions[(parseInt(i * space))]);
-                        }
-
-                        positionsIterate.forEach(element => {
+                        pointsSearch.forEach(element => {
                             findNearbyPlaces(element)
                             console.log("depois ==:>", element)
 
@@ -124,9 +169,9 @@
 
             function findNearbyPlaces(element) {
                 var request = {
-                    location: { lat: element.lat(), lng: element.lng() },
-                    radius: '2000',
-                    keyword: ['bar'],
+                    location: { lat: element.lat, lng: element.lng },
+                    radius: '5000',
+                    keyword: ['school'],
                     fields: ['name', 'formatted_address', 'geometry', 'rating',
                         'website', 'photos']
                 };
@@ -169,7 +214,7 @@
                         };
 
                         service.getDetails(request, (placeResult, status) => {
-                            showDetails(placeResult, marker, status)
+                            // showDetails(placeResult, marker, status)
                         });
                     });
 
