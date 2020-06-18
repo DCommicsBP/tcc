@@ -23,12 +23,14 @@
         }
     </style>
     <script>
-        var infoWindow;
-        var routePositions = new Array();
-        var routePlaces = new Array();
-        var positionsIterate = []; 
+
 
         function initMap() {
+
+            var infoWindow;
+            var routePositions = new Array();
+            var routePlaces = new Array();
+            var positionsIterate = [];
 
             var directionsRenderer = new google.maps.DirectionsRenderer;
             var directionsService = new google.maps.DirectionsService;
@@ -59,10 +61,10 @@
 
                         let j = 1;
 
-                           let space = routePositions.length/10; 
-                            for(let i =0; i <10; i++){
-                                positionsIterate.push(routePositions[(parseInt(i*space))]); 
-                         }
+                        let space = routePositions.length / 10;
+                        for (let i = 0; i < 10; i++) {
+                            positionsIterate.push(routePositions[(parseInt(i * space))]);
+                        }
 
                         positionsIterate.forEach(element => {
                             findNearbyPlaces(element)
@@ -76,6 +78,7 @@
                     }
                 });
             }
+
             function findNearbyPlaces(element) {
                 var request = {
                     location: { lat: element.lat(), lng: element.lng() },
@@ -91,10 +94,10 @@
 
             function nearbyCallback(results, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    
-                        createMarkers(results)   
-                    
-                }else{
+
+                    createMarkers(results)
+
+                } else {
                     alert("Não deu")
                     console.log(results)
                     console.log(status)
@@ -126,8 +129,7 @@
 
             }
 
-
-            }
+        }
 
     </script>
 </head>

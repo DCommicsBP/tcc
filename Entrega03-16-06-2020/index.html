@@ -22,6 +22,15 @@
             padding: 0;
         }
     </style>
+
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY&libraries=places&callback=initMap"
+        async defer></script>
     <script>
 
         function initMap() {
@@ -29,6 +38,7 @@
             var routePositions = new Array();
             var routePlaces = new Array();
             var positionsIterate = [];
+            var resultList = [];
 
             var directionsRenderer = new google.maps.DirectionsRenderer;
             var directionsService = new google.maps.DirectionsService;
@@ -45,23 +55,57 @@
             routePositions = calculateAndDisplayRoute(directionsService, directionsRenderer, map);
 
             function calculateAndDisplayRoute(directionsService, directionsRenderer, map) {
-                
+
                 directionsService.route({
                     origin: { lat: map.center.lat(), lng: map.center.lng() },  // Haight.
                     destination: { lat: -30.1259199, lng: -51.4336658 },  // Ocean Beach.
                     travelMode: google.maps.TravelMode["DRIVING"]
                 }, function (response, status) {
-                    console.log(status)
-                    console.log(response)
                     if (status == 'OK') {
-                        console.log(response.routes[0].overview_path)
+                        let distance = response.routes[0].legs[0].distance.value
+                        let steps = [];
+                        let distancePoints = distance / 5;
+                        let distances = [];
+                        let pointsSearch = [];
+
+                        for (let i = 1; i <= 5; i++) {
+                            distances.push(distancePoints * i);
+                        }
+
+
+                        response.routes[0].legs[0].steps.forEach(element => {
+                            steps.push(element)
+                        });
+
+
+                        const dist = distances[0];
+                        let distanceAcc = 0;
+                        let pointsIterate = [];
+
+                        for (let j = 0; j < steps.length; j++) {
+
+                            let element = steps[j];
+                            distanceAcc += element.distance.value;
+                            console.log('DISTANCIA ACUMULADA ===> ', distanceAcc)
+                            if (j < steps.length - 1) {
+                                if (distanceAcc >= dist && distanceAcc >= dist + distances[0]) {
+                                    let point = { lat: element.start_point.lat(), lng: element.start_point.lng() };
+
+                                    if (!pointsSearch.includes(point)) {
+                                        pointsSearch.push(point)
+                                    }
+                                }
+                            }
+
+                        }
+
                         directionsRenderer.setDirections(response);
                         routePositions = response.routes[0].overview_path;
 
                         let j = 1;
 
-                        let space = routePositions.length / 10;
-                        for (let i = 0; i < 10; i++) {
+                        let space = routePositions.length / 5;
+                        for (let i = 0; i < 4; i++) {
                             positionsIterate.push(routePositions[(parseInt(i * space))]);
                         }
 
@@ -91,9 +135,14 @@
                 service.nearbySearch(request, nearbyCallback);
             }
 
-            function nearbyCallback(results, status, viewStatus ) {
+
+            function nearbyCallback(results, status, pagination) {
+                var getNextPage;
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    debugger; 
+                    if (pagination.hasNextPage) {
+                        pagination.nextPage();
+                    }
+
                     createMarkers(results)
                 } else {
                     console.log(results)
@@ -102,7 +151,10 @@
             }
 
             function createMarkers(places) {
-                places.forEach(place => {
+
+                places.forEach(element => { resultList.push(element) });
+
+                resultList.forEach(place => {
                     let marker = new google.maps.Marker({
                         position: place.geometry.location,
                         map: map,
@@ -117,7 +169,6 @@
                         };
 
                         service.getDetails(request, (placeResult, status) => {
-                            resultList.push(element)
                             showDetails(placeResult, marker, status)
                         });
                     });
@@ -126,13 +177,6 @@
             }
         }
     </script>
-</head>
-
-<body>
-    <div id="map"></div>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY&libraries=places&callback=initMap"
-        async defer></script>
 </body>
 
 </html>
