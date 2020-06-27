@@ -39,7 +39,6 @@
             var routePlaces = new Array();
             var positionsIterate = [];
             var resultList = [];
-            var places = []; 
 
             var directionsRenderer = new google.maps.DirectionsRenderer;
             var directionsService = new google.maps.DirectionsService;
@@ -50,7 +49,6 @@
                 },
                 zoom: 16
             });
-
 
             var getDistance = function (lat1, lon1, lat2, lon2) {
                 var deg2rad = 0.017453292519943295; // === Math.PI / 180
@@ -68,9 +66,9 @@
 
                 return diam * Math.asin(Math.sqrt(a)) * 1000;
             };
-            var line = new google.maps.Polyline({
+            var line1 = new google.maps.Polyline({
                 path: [
-                    new google.maps.LatLng(-30.1513006,-51.1637612,17),
+                    new google.maps.LatLng( -30.1554432, -51.1402308),
                     new google.maps.LatLng(-30.1247805, -51.106651)
                 ],
                 strokeColor: "#FF0000",
@@ -79,9 +77,8 @@
                 map: map
             });
             
-            console.log(getDistance(-30.1226902,-51.178329, -30.1247805, -51.106651))
+            console.log('Distancia vermelha ', getDistance(-30.1554432, -51.1402308, -30.1247805, -51.106651))
             directionsRenderer.setMap(map);
-
             routePositions = calculateAndDisplayRoute(directionsService, directionsRenderer, map);
 
             function calculateAndDisplayRoute(directionsService, directionsRenderer, map) {
@@ -127,10 +124,14 @@
 
                         directionsRenderer.setDirections(response);
                         routePositions = response.routes[0].overview_path;
+
+
                         pointsSearch.forEach(element => {
                             findNearbyPlaces(element)
+                            console.log("depois ==:>", element)
+
                         });
-                         createMarkers()
+
                     } else {
                         window.alert('Directions request failed due to ' + status);
 
@@ -149,32 +150,24 @@
 
                 service = new google.maps.places.PlacesService(map);
                 service.nearbySearch(request, nearbyCallback);
-
-
             }
 
 
             function nearbyCallback(results, status, pagination) {
-                
                 var getNextPage;
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     if (pagination.hasNextPage) {
-                        results.forEach(element => {
-                           places.push(element); 
-                        });
-
                         pagination.nextPage();
-
                     }
 
-                   
+                    createMarkers(results)
                 } else {
                     console.log(results)
                     console.log(status)
                 }
             }
 
-            function createMarkers() {
+            function createMarkers(places) {
 
                 places.forEach(element => { resultList.push(element) });
 
