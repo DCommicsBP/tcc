@@ -1,28 +1,29 @@
 import React from 'react';
-import MapView from 'react-native-maps';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, Button, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { appStyle } from './app.style'
+import MainButton from './app/shared/buttons/mainButton';
+import { getNewDimensions } from './app/utils/dimansions/dimansions';
 
+const dimensions = getNewDimensions(100, 100)
 export default class App extends React.Component {
   render() {
     return (
-      <MapView
+      <LinearGradient
+        colors={['rgba(0,102,51,1)', 'rgba(190,19,190,190) 100%']}
+        style={appStyle.backgoround}
+      >
+        <Text style={appStyle.title}>Where I Go?</Text>
+        <Image
+          source={require('./assets/imageIcon.png')}
+          style={appStyle.imageIcon}
+        />
 
-        initialRegion={{
-          latitude: -30.033056,
-          longitude: -51.230000,
-          latitudeDelta: 0.0042,
-          longitudeDelta: 0.0031
-        }}
-      />
+        <View style={appStyle.viewButton}>
+          <MainButton />
+        </View>
+      </LinearGradient>
+
     );
   }
 }
-
-const styles = StyleSheet.create({
-  mapView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0
-  }
-})
