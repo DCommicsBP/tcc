@@ -3,6 +3,7 @@ import { StyleProp, TextStyle } from "react-native"
 
 const buttonDimensions = getNewDimensions(30,10)
 export const mainButtonStyle = {
+  
     circleGradient: {
         backgroundColor: "transparent",
         border: 5,
@@ -14,9 +15,9 @@ export const mainButtonStyle = {
       visit: {
         borderWidth: 1,
         borderColor: "whitesmoke",
-        fontSize:20,
+        fontSize:30,
         color: 'whitesmoke', 
-        textAlign: 'center', alignSelf: 'stretch'
+        textAlign: 'center', alignSelf: 'stretch', 
 
       } as StyleProp<TextStyle>
 }

@@ -1,23 +1,27 @@
-import React from 'react'
-import { Button, Text, Dimensions, TouchableOpacity, View } from 'react-native'
+import React, { Component } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { mainButtonStyle } from './mainButton.style';
+import { NavigationParams, NavigationScreenProp, NavigationState, NavigationInjectedProps, } from 'react-navigation';
+import Home from '../../pages/screens/Home';
+  
+  interface Props {
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  }
 
-const { height, width } = Dimensions.get('window');
+export default class MainButton extends Component {
 
-const buttonDimensions = {
-    buttonWidth: width, buttonHeight: height
+home(){
+    return <Home/>; 
 }
+render(){
 
-export default class MainButton extends React.Component {
-
-    render = () => {
         return (
-            <TouchableOpacity onPress={() => alert('funfa?')} >
+            <TouchableOpacity onPress={() =>{ this.home()}} >
               
                     <View style={mainButtonStyle.circleGradient}>
                         <Text style={mainButtonStyle.visit}>Entre!</Text>
                     </View>
             </TouchableOpacity>
         );
-    }
+}
 }
