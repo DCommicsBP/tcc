@@ -1,22 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { mainButtonStyle } from './mainButton.style';
 import { NavigationParams, NavigationScreenProp, NavigationState, NavigationInjectedProps, } from 'react-navigation';
-import Home from '../../pages/screens/Home';
+import { useNavigation } from '@react-navigation/native';
   
   interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
   }
-
-export default class MainButton extends Component {
-
-home(){
-    return <Home/>; 
-}
-render(){
+const MainButton = () => {
+  const navigate = useNavigation()
 
         return (
-            <TouchableOpacity onPress={() =>{ this.home()}} >
+            <TouchableOpacity onPress={() => navigate.navigate('Home')}>
               
                     <View style={mainButtonStyle.circleGradient}>
                         <Text style={mainButtonStyle.visit}>Entre!</Text>
@@ -24,4 +19,4 @@ render(){
             </TouchableOpacity>
         );
 }
-}
+export default MainButton;
