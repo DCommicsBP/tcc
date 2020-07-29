@@ -4,10 +4,6 @@ import { getNewDimensions, dimensionsMain, getNewPosition } from "./app/utils/di
 
 const imageDimensions = getNewDimensions(28.5, 30)
 const imagePosition = getNewPosition(17,0,30)
-console.log(imageDimensions)
-console.warn(imageDimensions)
-debugger; 
-debugger;
 export const appStyle = StyleSheet.create({
     backgoround: {
         height: dimensionsMain.height,

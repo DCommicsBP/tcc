@@ -1,14 +1,12 @@
 import {StyleSheet} from 'react-native'; 
 
 export const homeStyles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        backgroundColor: 'whitesmoke'
-    }, 
-
     text: {
-        color:"#161924", 
+        color:"#CCFF99", 
         fontSize: 20, 
-        fontWeight: "500"
+        fontWeight: "500", 
+        position: 'relative', 
+        left: '5%', 
+        margin: 15,
     } 
 })

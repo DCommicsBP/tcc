@@ -1,15 +1,13 @@
 import * as React from "react";
-import { View, Text } from "react-native";
-import { Routes } from "./Home";
+import MainTitle from "../../shared/titles/MainTitle";
+import { View } from "react-native";
 
 export default class LastSearch extends React.Component {
     render() {
         return (
-        <View>
-            <Routes />
-            <Text>Last Search
-                </Text>
-        </View>
-        );
+            <View>
+                <MainTitle />
+            </View>
+        ); 
     }
 }
