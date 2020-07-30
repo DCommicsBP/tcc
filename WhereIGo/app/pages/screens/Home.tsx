@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { createAppContainer, SceneView } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import Map from './Map'
 import Search from '../screens/Search';
 import LastSearch from '../screens/LastSearch'
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { homeStyles } from '../styles/home.style';
 
 
@@ -21,19 +21,13 @@ export const Routes = createAppContainer(
             drawerWidth:250, 
             overlayColor: {light:'#476545', dark: 'grey'}, 
             drawerType: 'slide'     
-            
         }
     ), 
-    
 )
 
 export default class Home extends React.Component {
     render() {
         return (<Routes />)
-    }
-
-    teste() {
-
     }
 }
 

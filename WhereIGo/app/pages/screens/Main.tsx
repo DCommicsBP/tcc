@@ -11,7 +11,7 @@ export default class Main extends React.Component {
                 colors={['rgba(0,102,51,1)', 'rgba(190,19,190,190) 100%']}
                 style={appStyle.backgoround}
             >
-                <Text style={appStyle.title}>Where I Go?</Text>
+                <Text style={appStyle.title}>Where Do I Go?</Text>
                 <Image
                     source={require('../../../assets/imageIcon.png')}
                     style={appStyle.imageIcon}
