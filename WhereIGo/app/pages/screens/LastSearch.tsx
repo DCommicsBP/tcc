@@ -14,10 +14,10 @@ const request: SearchModel = {
         name: 'Minha casa '
 
     },
-    informations: [''],
+    informations: [],
     paymentValue: 0,
     quilometers: 0,
-    placesType: [''],
+    placesType: [],
     toPlace: {
         address: 'Tramandaí - Rio Grande do Sul',
         location: {

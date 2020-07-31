@@ -1,4 +1,4 @@
-import { getNewDimensions } from "../../utils/dimansions/dimansions"
+import { getNewDimensions } from "../../../utils/dimansions/dimansions"
 import { StyleProp, TextStyle } from "react-native"
 
 const buttonDimensions = getNewDimensions(30,10)
