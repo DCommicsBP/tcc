@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import { getNewDimensions } from "../../utils/dimansions/dimansions";
 
 export const makeSearchRequestStyle = StyleSheet.create({
     mainView: {
@@ -43,25 +44,24 @@ export const makeSearchRequestStyle = StyleSheet.create({
         position:'relative', 
         color: '#666600', 
         fontWeight:'bold',
-        top:'10%', 
         flexDirection: 'row', 
         flex: 0.1, 
-        left: '5%'
+        left: '6%', 
+        top: '-10%'
     }, 
     kilometers: {
         position: 'relative', 
-        top: '4%', 
         flex: 0.1,
-        left:'15%', 
+        left:'15%',
+        top: '-10%' 
     }, 
 
     textKilometers: {
         position: "relative", 
         color: 'green', 
         width: 150, 
-        fontWeight:'bold', 
         textAlign:'left', 
-        top:'20%', 
+        top:'10%', 
         right:'9%', 
         margin:5, 
         padding:5
@@ -76,7 +76,7 @@ export const makeSearchRequestStyle = StyleSheet.create({
     }, 
     type:{
         position: "relative", 
-        top: '10%', 
+        top: '-25%', 
         left:'15%', 
         margin:5,
         padding:5, 
@@ -87,9 +87,13 @@ export const makeSearchRequestStyle = StyleSheet.create({
         fontWeight: 'bold',
         position: "relative", 
         right:'6%', 
+        
     }, 
     viewNotFound: {
-        position:'relative', top:'15%', left:'15%'
+        position:'relative', top:'15%', left:'15%', width:getNewDimensions(80,1).width, marginTop:10
+    }, 
+    button: {
+        
     }
     
 }); 

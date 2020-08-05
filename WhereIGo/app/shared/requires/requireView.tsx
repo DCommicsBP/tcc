@@ -10,14 +10,13 @@ const teste = (model: string[]): any[] => {
     model.forEach(element => {
         textS.push(<Text>{element}</Text>)
     })
-    console.warn(textS)
     return textS;
 }
 export default function makeSearchRequest(searchRequest: SearchModel) {
 
     return (
         <View style={makeSearchRequestStyle.mainView}>
-            <View style={{ flexDirection: 'row', flex: 0.2 }}>
+            <View style={{ flexDirection: 'row', flex: 0.3 }}>
 
                 <View style={makeSearchRequestStyle.viewPlaces} >
                     <Text style={makeSearchRequestStyle.title}> Saindo de </Text>

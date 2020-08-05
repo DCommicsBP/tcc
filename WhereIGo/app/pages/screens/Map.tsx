@@ -3,10 +3,8 @@ import { Text, View } from 'react-native';
 import  MapView  from 'react-native-maps'
 import { mapStyle } from '../styles/map.stye';
 
-export default  class Map extends React.Component{
-    render () {
+export default function Map(props: any){
         return   <View style={mapStyle.container}>
         <MapView style={mapStyle.mapStyle} />
       </View>
-    }
 }
