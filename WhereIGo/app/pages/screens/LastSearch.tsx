@@ -39,9 +39,7 @@ export default function LastSearch() {
             <View style={{flex:0.9,  top: '5%'}}>
                 {requestView(request)}
             </View>
-            <View>
-                {LastSearchButton('Início', 'Retornar')}
-            </View>
+           
         </View>
     );
 }

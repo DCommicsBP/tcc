@@ -24,9 +24,9 @@ export const Navigator = (
       drawerType="slide"
 
     >
-      <Drawer.Screen name="Início" component={() => <Home />} />
-      <Drawer.Screen name="Nova Busca" component={() => <Search />} />
-      <Drawer.Screen name="Última Busca" component={() => <LastSearch />} />
+      <Drawer.Screen name="Início" component={Home} />
+      <Drawer.Screen name="Nova Busca" component={Search} />
+      <Drawer.Screen name="Última Busca" component={LastSearch} />
     </Drawer.Navigator>
 
 ) 

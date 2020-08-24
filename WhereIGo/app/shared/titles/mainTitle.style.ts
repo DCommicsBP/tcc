@@ -12,7 +12,7 @@ export const mainTitleStyle = StyleSheet.create({
     
     intermediateView: {
         position: "relative", 
-        backgroundColor: '#009900', 
+        backgroundColor: '#345678', 
         width: getNewDimensions(66,100).width, 
         height: getNewDimensions(100, 7).height, 
         top: '5%', 
