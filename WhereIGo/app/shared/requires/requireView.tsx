@@ -2,7 +2,7 @@ import * as React from 'react'
 import SearchModel from "../../models/search.model";
 import { View, Text } from "react-native";
 import { makeSearchRequestStyle } from './requireView.style';
-import LastSearchButton from '../buttons/lest-search-buttons/LastSearchButton';
+import MainCustomButton from '../buttons/MainCustomButton';
 
 
 const teste = (model: string[]): any[] => {
@@ -16,8 +16,7 @@ const teste = (model: string[]): any[] => {
     return textS;
 }
 export default function makeSearchRequest(searchRequest: SearchModel) {
-    searchRequest.placesType = [], 
-    searchRequest.informations = []
+
     return (
         <View style={makeSearchRequestStyle.mainView}>
             <View style={makeSearchRequestStyle.widthMainBox}>
@@ -57,9 +56,14 @@ export default function makeSearchRequest(searchRequest: SearchModel) {
                     {searchRequest.placesType.map(element => <Text style={makeSearchRequestStyle.itens}>{element}</Text>)}
                 </View> : <View style={makeSearchRequestStyle.viewPlacesNotFound}><Text style={makeSearchRequestStyle.title}>Tipos de lugares não especificados</Text></View>}
             </View>
-            <View>
-                {LastSearchButton('Início', 'Retornar')}
+            <View >
+            {MainCustomButton('Início', 'Buscar', '#DDD', '#1C56E6')}
+            {MainCustomButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
+
+
             </View>
         </View>
     )
 }
+
+//http://paletton.com/#uid=53M0b0kpPUceqXqkxVNvsRCN6IV

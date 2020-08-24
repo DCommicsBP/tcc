@@ -3,7 +3,7 @@ import MainTitle from "../../shared/titles/MainTitle";
 import { View } from "react-native";
 import requestView from "../../shared/requires/requireView";
 import SearchModel from "../../models/search.model";
-import LastSearchButton from "../../shared/buttons/lest-search-buttons/LastSearchButton";
+import LastSearchButton from "../../shared/buttons/MainCustomButton";
 
 const request: SearchModel = {
     classification: 4,
@@ -28,7 +28,6 @@ const request: SearchModel = {
     }
 }
 
-
 export default function LastSearch() {
     return (
         <View style={{flex:1}}>
@@ -36,7 +35,7 @@ export default function LastSearch() {
                 {MainTitle('Última Busca Realizada')}
 
             </View>
-            <View style={{flex:0.9,  top: '5%'}}>
+            <View style={{flex:0.9,  top: '5%', left:'4%'}}>
                 {requestView(request)}
             </View>
            
