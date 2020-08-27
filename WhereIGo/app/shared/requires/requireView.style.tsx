@@ -3,97 +3,73 @@ import { getNewDimensions } from "../../utils/dimansions/dimansions";
 
 export const makeSearchRequestStyle = StyleSheet.create({
     mainView: {
-        flex:1, 
-        position: "relative", 
-        left: '10%', 
-        
+        position: 'relative', 
     }, 
+    // al main title in init session
     title: {
-        color: 'green', 
-        fontSize: 21, 
-        fontWeight:'bold', 
-        right:'10%'
+        color: '#2459D3', 
+        fontWeight: 'bold', 
+        fontSize:20, 
+        margin:5, 
+        padding:5, 
     }, 
 
-    priceColor: {
-        position:'relative', 
-        color: '#666600', 
-        fontWeight:'bold', 
-        top:'2%'
-    }, 
+    // places session
+    
+    widthMainBox: {
+        display:'flex',flexDirection:'row', margin:10, padding:10, position: 'relative'
+    },
 
     viewPlaces: {
-        flex: 0.3, margin:5, padding:5, position: "relative", left:'20%'
+        width: getNewDimensions(45,2).width, margin: 5, 
+        right: '10%',
+        color: '#09318C'
     }, 
-
+    
     describe: {
-        position:'relative', 
-        color: '#666600', 
-        fontWeight:'bold'
+        color: '#09318C', 
+        fontSize:18, 
     }, 
 
     latlng: {
-        position: "relative", 
         color: 'grey', 
-        fontWeight:'bold', 
-        left: '5%', 
-        top: '25%'
+        fontWeight:'bold'
+    }, 
 
+    // price and kilometers session 
+
+    priceAndKilometers: {
+        position: 'relative', display:'flex', flexDirection:'row', 
     }, 
-    price: {
-        position:'relative', 
-        color: '#666600', 
-        fontWeight:'bold',
-        flexDirection: 'row', 
-        flex: 0.1, 
-        left: '6%', 
-        top: '-10%'
+
+    priceAndKmColor: {
+        color: 'grey', position:'relative', top: '-2%', fontSize: 30       
     }, 
-    kilometers: {
+
+    // type and informations sessions
+    typeAndPlacesBox: {
         position: 'relative', 
-        flex: 0.1,
-        left:'15%',
-        top: '-10%' 
-    }, 
-
-    textKilometers: {
-        position: "relative", 
-        color: 'green', 
-        width: 150, 
-        textAlign:'left', 
-        top:'10%', 
-        right:'9%', 
-        margin:5, 
-        padding:5
+        display:"flex", 
+        flexDirection:'row'
     },
-    numberKm:{
-        position: "relative", 
-        left: '40%',
-        color:'grey',  
-        fontSize: 20, 
-        fontWeight:'bold',
-        top: '-55%'   
-    }, 
-    type:{
-        position: "relative", 
-        top: '-25%', 
-        left:'15%', 
-        margin:5,
-        padding:5, 
-    
-    }, 
+
     itens: {
-        color: 'grey', 
-        fontWeight: 'bold',
-        position: "relative", 
-        right:'6%', 
+         position: 'relative', 
+         left: '30%'       
+    },
+
+    // infos and places not found
+
+    viewInfosNotFound: {
+        position: 'relative',
         
     }, 
-    viewNotFound: {
-        position:'relative', top:'15%', left:'15%', width:getNewDimensions(80,1).width, marginTop:10
-    }, 
-    button: {
+    
+    viewPlacesNotFound: {
+        position: 'relative',
+        top: '15%', 
+        right: '640%'
         
-    }
+    }, 
     
 }); 

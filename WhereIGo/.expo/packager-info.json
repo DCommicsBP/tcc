@@ -1,10 +1,1 @@
-{
-  "webpackServerPort": 19006,
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://bd-qs7.dccomicsbp.whereigo.exp.direct",
-  "packagerNgrokUrl": "https://packager.bd-qs7.dccomicsbp.whereigo.exp.direct",
-  "ngrokPid": 5140,
-  "packagerPort": 19001,
-  "packagerPid": 16988,
-  "devToolsPort": 19002
-}
+{}
