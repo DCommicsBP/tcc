@@ -7,7 +7,7 @@ export default function  MainTitle (title: string){
         <Native.View style={mainTitleStyle.intermediateView}>
             <Native.View style={mainTitleStyle.viewTitle}>
                 <Native.Text style={mainTitleStyle.title}>
-                    {title}
+                    {title} 
                 </Native.Text>
             </Native.View>
         </Native.View>

@@ -7,8 +7,11 @@ import Positions from '../../utils/dimansions/dimansions';
 
 const teste = (model: string[]): any[] => {
     let textS: any = []
+    let count = 0; 
     model.forEach(element => {
-        textS.push(<Text>{element}</Text>)
+      
+        textS.push(<Text key={count}>{element}</Text>)
+        count ++; 
     })
     return textS;
 }

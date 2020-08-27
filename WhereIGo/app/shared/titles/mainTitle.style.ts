@@ -40,7 +40,6 @@ export const mainTitleStyle = StyleSheet.create({
         fontWeight: 'bold', 
         fontSize: 20, 
         left: '-32%', 
-        color: '#666600'
         
     }
 })
