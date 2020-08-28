@@ -1,15 +1,10 @@
-import * as React from "react"; 
-import { View, Text } from "react-native";
-import MainTitle from "../../shared/titles/MainTitle";
+import * as React from "react";
+import SearchInput from "../../shared/inputs/SearchInput";
 
-import RNGooglePlaces from 'react-native-google-places';
+export default function Search(){
+    return (
+        <SearchInput>
 
-export default class Search extends React.Component{
-    render(){
-        return<View>
-            {MainTitle('Nova Busca')}
-            
-
-        </View>
-    }
+        </SearchInput>
+    ) 
 }

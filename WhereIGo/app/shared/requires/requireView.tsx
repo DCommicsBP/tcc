@@ -49,11 +49,11 @@ export default function makeSearchRequest(searchRequest: SearchModel) {
                 {searchRequest.informations.length > 0 ?
                     <View >
                         <Text style={makeSearchRequestStyle.title}>Informações: </Text>
-                        {searchRequest.informations.map(element => <Text style={makeSearchRequestStyle.itens}>{element}</Text>)}
+                        {teste(searchRequest.informations)}
                     </View> : <View style={makeSearchRequestStyle.viewInfosNotFound}><Text style={makeSearchRequestStyle.title}>Informações não especificadas</Text></View>}
                 {searchRequest.placesType.length > 0 ? <View >
                     <Text style={makeSearchRequestStyle.title}>Tipos de Lugares: </Text>
-                    {searchRequest.placesType.map(element => <Text style={makeSearchRequestStyle.itens}>{element}</Text>)}
+                    {teste(searchRequest.placesType)}
                 </View> : <View style={makeSearchRequestStyle.viewPlacesNotFound}><Text style={makeSearchRequestStyle.title}>Tipos de lugares não especificados</Text></View>}
             </View>
             <View >
