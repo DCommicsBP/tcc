@@ -10,7 +10,7 @@ export const mapStyle = StyleSheet.create({
         justifyContent: 'center',
       },
       mapStyle: {
-        width: 300,
-        height: 300,
+        width: newMapDimensions.width,
+        height: newMapDimensions.height,
       },
 })

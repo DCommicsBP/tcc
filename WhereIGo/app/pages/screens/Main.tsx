@@ -2,7 +2,6 @@ import * as React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { appStyle } from '../styles/main.styles';
 import { Text, Image, View } from 'react-native';
-import MainButton from '../../shared/buttons/main-button/MainButton';
 
 export default class Main extends React.Component {
     render() {
@@ -18,7 +17,6 @@ export default class Main extends React.Component {
                 />
 
                 <View style={appStyle.viewButton}>
-                    <MainButton />
                 </View>
             </LinearGradient>
 
