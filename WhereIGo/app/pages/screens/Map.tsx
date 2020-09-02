@@ -36,12 +36,11 @@ export default class Map extends React.Component{
     let {region} = this.state; 
     return (
       <View style={{flex: 1}}>
-        <MapView style={{flex:1}} 
+        <MapView style={{flex:1, width: '85%', left: '5%'}} 
         region={region}
         showsUserLocation
         />
         <SearchInput/>
-
       </View>
     )
   }

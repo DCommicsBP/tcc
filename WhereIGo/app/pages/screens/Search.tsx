@@ -1,13 +1,13 @@
 import * as React from "react";
 import SearchInput from "../../shared/inputs/SearchInput";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 export default class Search extends React.Component {
     state = {
         region: {
-          latitudeDelta: 0, latitude: 0, longitudeDelta: 0, longitude: 0
+            latitudeDelta: 0, latitude: 0, longitudeDelta: 0, longitude: 0
         }
-      }
+    }
 
 
     async componentDidMount() {
@@ -32,10 +32,33 @@ export default class Search extends React.Component {
     render() {
         let { region } = this.state;
         return (
-            <View style={{ flex: 1 }}>
-                <SearchInput />
-                <SearchInput />
-            </View>
+
+                <View style={{ top: '30%'}}>
+                    <View>
+                        <Text style={{
+                                 marginTop: 20,
+                                 marginBottom: 20,
+                                 marginLeft: 20,
+                                 marginRight: 20,
+                                 position: 'relative',
+                                 top: '-140%'
+                        }}>
+                            Escolha as configurações que você deseja utilizar na busca.
+                        </Text>
+                    </View>
+                    <Text style={{
+                        marginTop: 20,
+                        marginBottom: 20,
+                        marginLeft: 20,
+                        marginRight: 20,
+                        position: 'absolute',
+                        top: '-80%'
+                    }}>
+                        Sai de
+                </Text>
+                    <SearchInput />
+                </View>
+                
         )
     }
 }
