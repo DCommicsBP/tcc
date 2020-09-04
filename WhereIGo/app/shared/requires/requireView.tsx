@@ -7,11 +7,11 @@ import MainCustomButton from '../buttons/MainCustomButton';
 
 const teste = (model: string[]): any[] => {
     let textS: any = []
-    let key = 0; 
+    let key = 0;
     model.forEach(element => {
-        let keyInt = key+""; 
+        let keyInt = key + "";
         textS.push(<Text key={keyInt}>{element}</Text>)
-        key ++; 
+        key++;
     })
     return textS;
 }
@@ -56,10 +56,13 @@ export default function makeSearchRequest(searchRequest: SearchModel) {
                     {teste(searchRequest.placesType)}
                 </View> : <View style={makeSearchRequestStyle.viewPlacesNotFound}><Text style={makeSearchRequestStyle.title}>Tipos de lugares não especificados</Text></View>}
             </View>
-            <View >
-            {MainCustomButton('Início', 'Buscar', '#DDD', '#1C56E6')}
-            {MainCustomButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
-
+            <View style={{
+                position: 'relative', 
+                left: '10%', 
+                top:'5%'
+            }}>
+                {MainCustomButton('Início', 'Buscar', '#DDD', '#1C56E6')}
+                {MainCustomButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
 
             </View>
         </View>

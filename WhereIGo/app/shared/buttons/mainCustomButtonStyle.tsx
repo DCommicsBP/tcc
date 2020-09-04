@@ -7,12 +7,11 @@ export let buttonView = (backgroundColor: string)=> {
         
     return {
         backgroundColor: backgroundColor,
-        width: customDimensions.width,
-        height: customDimensions.height,
         position: "relative",
         padding: 5,
         margin: 5,
-        marginTop: 10
+        marginTop: 10, 
+        width: '70%'
     } as StyleProp<ViewStyle>
 }
 

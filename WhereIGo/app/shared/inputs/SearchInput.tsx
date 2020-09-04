@@ -17,22 +17,19 @@ export default class SearchInput extends Component {
           autoCorrect: false
         }}
 
-        style={{
-          
-        }}
         fetchDetails
         enablePoweredByContainer={false}
         styles={{
           container: {
             position: 'absolute', 
-            width: '100%', 
+            width: '100%',
+            top: '100%' 
           }, 
           textInput: {
             borderTopWidth: 0, 
             borderBottomWidth: 0, 
             flex: 1, 
             height: 54, 
-            top: 20
           }, 
           description:{
               

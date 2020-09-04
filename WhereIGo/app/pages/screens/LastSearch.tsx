@@ -3,7 +3,6 @@ import MainTitle from "../../shared/titles/MainTitle";
 import { View } from "react-native";
 import requestView from "../../shared/requires/requireView";
 import SearchModel from "../../models/search.model";
-import LastSearchButton from "../../shared/buttons/MainCustomButton";
 
 const request: SearchModel = {
     classification: 4,
