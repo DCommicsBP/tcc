@@ -7,9 +7,8 @@ import SearchInput from '../../shared/inputs/SearchInput';
 
 export default function Home() {
 
-    const navigation = useNavigation(); 
     return (<View style={{flex:1}}>
-        <Map/>
-    </View>)
+                <Map/>
+        </View>)
 }
 

@@ -2,9 +2,8 @@ import *  as React from 'react'
 import { ScrollView } from 'react-native-gesture-handler';
 import { View, Text } from 'react-native';
 import SearchInput from '../../shared/inputs/SearchInput';
-import MainCustomButton from '../../shared/buttons/MainCustomButton';
 
-export default function Configurations(){ 
+export default function Test(){ 
 return(
     <ScrollView>
              <View style={{
@@ -16,11 +15,10 @@ return(
                         marginLeft: 20,
                         marginRight: 20,
                     }}>
-                        Sai de
+                        Test
                     </Text>
                     <React.Fragment>
-                    { MainCustomButton("Test", "Test", "#FFF","#000")}
-                         
+                         <SearchInput />
                     </React.Fragment>
                 </View>
 
@@ -35,13 +33,11 @@ return(
                         marginLeft: 20,
                         marginRight: 20,
                     }}>
-
+                        Sai de
                     </Text>
-                    <View style={{position:'relative', top: '60%'}}>
-
-                    </View>
-
-                 
+                    <React.Fragment>
+                         <SearchInput />
+                    </React.Fragment>
                 </View>
                
  
