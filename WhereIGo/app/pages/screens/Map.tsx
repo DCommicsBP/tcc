@@ -40,9 +40,12 @@ export default class Map extends React.Component{
         region={region}
         showsUserLocation
         />
-        <SearchInput/>
       </View>
     )
   }
 }
   
+/*
+TODO
+Aqui devem ser renderizados os pins da busca e 
+*/ 

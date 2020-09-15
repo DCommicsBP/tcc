@@ -4,7 +4,12 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 export default class SearchInput extends Component {
     render (){
         return <GooglePlacesAutocomplete
-          onPress={(response)=>{console.log(response)}}
+        
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(data, details);
+        }}
+
           query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
           key: 'AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY',
@@ -23,7 +28,6 @@ export default class SearchInput extends Component {
           container: {
             position: 'absolute', 
             width: '100%',
-            top: '100%' 
           }, 
           textInput: {
             borderTopWidth: 0, 
@@ -41,8 +45,9 @@ export default class SearchInput extends Component {
             marginLeft: 1, 
             marginTop:1, 
             left: 8, 
-            backgroundColor:'white', 
+            backgroundColor:'blue', 
             width: '96%', 
+        
           }, 
           poweredContainer:{
 
@@ -54,7 +59,6 @@ export default class SearchInput extends Component {
             left: 20, 
 
           }, 
-          
           textInputContainer:{
             backgroundColor:'transparent', 
             borderBottomColor: 'transparent', 

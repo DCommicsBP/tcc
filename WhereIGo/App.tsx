@@ -5,7 +5,7 @@ import LastSearch from './app/pages/screens/LastSearch';
 import Home from './app/pages/screens/Home';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Draw from './app/routes/router.navigations';
+import Draw from './app/routes/search.routes';
 
 const Drawer = createDrawerNavigator();
 export const Navigator = (
