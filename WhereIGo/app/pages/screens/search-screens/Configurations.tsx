@@ -11,26 +11,28 @@ export default function ConfigPlace() {
     const navigate = useNavigation();
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, top: '5%' }}>
             <Text style={{
-               paddingLeft: 15,
-               marginLeft: 15,
-               fontFamily: 'monospace', 
+                paddingLeft: 15,
+                marginLeft: 15,
+                fontFamily: 'monospace',
             }}>
                 Origem:
             </Text >
-            <View  style={{flex: 0.1}}>
-                <SearchInput />
+            <View style={{ flex: 0.15 }}>
+                <SearchInput newPostition="120" />
             </View>
             <Text style={{
                 paddingLeft: 15,
                 marginLeft: 15,
-                fontFamily: 'monospace', 
+                fontFamily: 'monospace',
+                flex: 0.15, 
+                top: '10%'
             }}>
                 Destino
             </Text>
-            <View style={{flex:0.1}}>
-                <SearchInput />
+            <View style={{ flex: 0.1, top: '2%' }}>
+                <SearchInput newPostition="9" />
             </View>
 
         </View>

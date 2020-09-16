@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import MapView from 'react-native-maps'
-import SearchInput from '../../shared/inputs/SearchInput';
 
 export default class Map extends React.Component{
 
@@ -47,5 +46,5 @@ export default class Map extends React.Component{
   
 /*
 TODO
-Aqui devem ser renderizados os pins da busca e 
+Aqui devem ser renderizados os pins da busca e a rota que deve ser seguido até o local
 */ 

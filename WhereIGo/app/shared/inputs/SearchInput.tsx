@@ -1,8 +1,18 @@
 import React, { Component } from 'react'; 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-export default class SearchInput extends Component {
-    render (){
+export default function SearchInput (props: any) {
+  let values = Object.keys(props).map(key => props[key]);
+  console.log(values)
+
+  let numberValue = 0; 
+   if ( values[0] === 'top'){
+    numberValue = 120; 
+   } else if (values[0] === 'bottom'){
+    numberValue = 9; 
+   }
+  
+ 
         return <GooglePlacesAutocomplete
         
         onPress={(data, details = null) => {
@@ -28,6 +38,7 @@ export default class SearchInput extends Component {
           container: {
             position: 'absolute', 
             width: '100%',
+            
           }, 
           textInput: {
             borderTopWidth: 0, 
@@ -36,7 +47,6 @@ export default class SearchInput extends Component {
             height: 54, 
           }, 
           description:{
-              
           },
           row:{
             height: 50, 
@@ -46,11 +56,12 @@ export default class SearchInput extends Component {
             marginTop:1, 
             left: 8, 
             backgroundColor:'blue', 
-            width: '96%', 
+            width: '96%',
+             
         
           }, 
           poweredContainer:{
-
+              top: 50
           }, 
           separator:{
             backgroundColor:'transparent', 
@@ -59,13 +70,15 @@ export default class SearchInput extends Component {
             left: 20, 
 
           }, 
+          listView: {
+            top: numberValue
+          }, 
           textInputContainer:{
             backgroundColor:'transparent', 
             borderBottomColor: 'transparent', 
-            borderTopColor:'transparent', 
-
+            borderTopColor:'transparent',       
+            
           }
         }} 
     />
-   }
 }

@@ -18,7 +18,6 @@ export default function Test() {
                     Test
                     </Text>
                 <React.Fragment>
-                    <SearchInput />
                 </React.Fragment>
             </View>
 
@@ -36,7 +35,6 @@ export default function Test() {
                     Sai de
                     </Text>
                 <React.Fragment>
-                    <SearchInput />
                 </React.Fragment>
             </View>
         </ScrollView>
