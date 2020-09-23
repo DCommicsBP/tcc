@@ -4,41 +4,51 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 export default function SearchInput (props: any) {
   let values = Object.keys(props).map(key => props[key]);
   console.log(values)
-
+  
   let numberValue = 0; 
-   if ( values[0] === 'top'){
+   if ( values[0] == 'top'){
     numberValue = 120; 
-   } else if (values[0] === 'bottom'){
-    numberValue = 9; 
+   } else if (values[0] == 'bottom'){
+    numberValue = 65; 
    }
   
- 
+
         return <GooglePlacesAutocomplete
-        
+    
+        onChangeText={ ()=> {
+          
+        }}
         onPress={(data, details = null) => {
+          props.onSubmit(details)
           // 'details' is provided when fetchDetails = true
-          console.log(data, details);
+          console.log( details);
         }}
 
+        GooglePlacesDetailsQuery={{
+
+        }}
           query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
           key: 'AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY',
-          language: 'en', // language of the results
-          types: '(cities)' // default: 'geocode'
+          language: 'pt-BR', // language of the results
+          types: '(cities)',
+           // default: 'geocode'
         }}
         
         textInputProps={{
           autoCapitalize:'none', 
           autoCorrect: false
         }}
-
+        accessibilityViewIsModal={true}
+        numberOfLines={2}
+        maxLength={2}
         fetchDetails
         enablePoweredByContainer={false}
+
         styles={{
           container: {
             position: 'absolute', 
             width: '100%',
-            
           }, 
           textInput: {
             borderTopWidth: 0, 
@@ -55,7 +65,7 @@ export default function SearchInput (props: any) {
             marginLeft: 1, 
             marginTop:1, 
             left: 8, 
-            backgroundColor:'blue', 
+            backgroundColor:'#A6C6E1', 
             width: '96%',
              
         
@@ -71,8 +81,9 @@ export default function SearchInput (props: any) {
 
           }, 
           listView: {
-            top: numberValue
-          }, 
+            top: numberValue,
+            
+          },
           textInputContainer:{
             backgroundColor:'transparent', 
             borderBottomColor: 'transparent', 
