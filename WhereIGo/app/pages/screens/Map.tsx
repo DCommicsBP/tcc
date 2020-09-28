@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import MapView from 'react-native-maps'
+import SearchInput from '../../shared/inputs/SearchInput';
 
 export default class Map extends React.Component{
 
@@ -39,6 +40,7 @@ export default class Map extends React.Component{
         region={region}
         showsUserLocation
         />
+        <SearchInput  newPostition="bottom" onSubmit={(detailValue:any)=> console.log(detailValue)} />
       </View>
     )
   }

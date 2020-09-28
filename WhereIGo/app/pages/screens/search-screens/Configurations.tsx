@@ -6,12 +6,17 @@ import SearchInput from '../../../shared/inputs/SearchInput';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from '@react-navigation/native';
 import { getNewDimensions } from '../../../utils/dimansions/dimansions';
+import LocationModel from '../../../models/location.model';
+import MainCustomButtonParameter from '../../../shared/buttons/MainCustomButtonParameter';
+import MainReturnButton from '../../../shared/buttons/MainReturnButton';
 
 
 export default function ConfigPlace() {
 
     const [origin, setOrigin] = React.useState(); 
     const [destiny, setDestiny] = React.useState(); 
+
+       
     
     const navigate = useNavigation();
 
@@ -41,10 +46,10 @@ export default function ConfigPlace() {
                 <SearchInput  newPostition="bottom" onSubmit={(detailValue:any)=> setDestiny(detailValue)} />
             </View>
             <View style={{position: 'relative', left: getNewDimensions(15,0).width, flex: 0.5, top: 250}}>
-                {MainCustomButton('Condições de Acesso', 'Próximo ->', '#DDD', '#1C56E6')}
-                {MainCustomButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
+                {MainCustomButtonParameter('Condições de Acesso', 'Próximo ->', '#DDD', '#1C56E6', { origin: origin, destiny: destiny })}
+                {MainReturnButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
             </View>
-                {console.log('================================================= Origin ', origin, '================================================= Origin ', destiny)}
+
 
         </View>
 

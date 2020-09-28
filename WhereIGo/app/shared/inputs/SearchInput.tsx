@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import LocationModel from '../../models/location.model';
 
 export default function SearchInput (props: any) {
   let values = Object.keys(props).map(key => props[key]);
@@ -20,8 +21,15 @@ export default function SearchInput (props: any) {
         }}
         onPress={(data, details = null) => {
           props.onSubmit(details)
+          details?.geometry
           // 'details' is provided when fetchDetails = true
-          console.log( details);
+          console.log('lat ===> ',  details?.geometry.location.lat);
+          let locationModel: LocationModel = {
+            lat: details?.geometry.location.lat, 
+            lng: details?.geometry.location.lng
+          }
+          props.onSubmit(locationModel) ; 
+         
         }}
 
         GooglePlacesDetailsQuery={{
@@ -82,8 +90,8 @@ export default function SearchInput (props: any) {
           }, 
           listView: {
             top: numberValue,
-            
           },
+
           textInputContainer:{
             backgroundColor:'transparent', 
             borderBottomColor: 'transparent', 
