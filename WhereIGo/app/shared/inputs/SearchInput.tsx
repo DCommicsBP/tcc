@@ -24,6 +24,7 @@ export default function SearchInput (props: any) {
           details?.geometry
           // 'details' is provided when fetchDetails = true
           console.log('lat ===> ',  details?.geometry.location.lat);
+          console.log('lng ===> ',  details?.geometry.location.lng);
           let locationModel: LocationModel = {
             lat: details?.geometry.location.lat, 
             lng: details?.geometry.location.lng
