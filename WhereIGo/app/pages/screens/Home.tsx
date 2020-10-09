@@ -1,12 +1,14 @@
-import * as React from 'react'; 
-import { View, Text } from 'react-native';
+import * as React from 'react';
+import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Map from './Map';
+import SearchInput from '../../shared/inputs/SearchInput';
 
-export default class Home extends React.Component{
-    render(){
-        return <View>
-               <Text>
-                   Home entrei !
-                   </Text> 
-        </View>;
-    }
+
+export default function Home() {
+
+    return (<View style={{flex:1}}>
+                <Map/>
+        </View>)
 }
+
