@@ -1,29 +1,40 @@
-import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer'
+import Search from './app/pages/screens/Search';
+import LastSearch from './app/pages/screens/LastSearch';
 import Home from './app/pages/screens/Home';
-import Main from './app/pages/screens/Main';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import Draw from './app/routes/search.routes';
 
-const Stack = createStackNavigator();
-function MyStack() {
-  
+const Drawer = createDrawerNavigator();
+export const Navigator = (
+    <Drawer.Navigator
+    statusBarAnimation="slide"
+      overlayColor="dark"
+      drawerType="slide"
+    >
+      <Drawer.Screen name="Início" component={Home} />
+      <Drawer.Screen name="Nova Busca" component={Search} />
+      <Drawer.Screen name="Última Busca" component={LastSearch} />
+      <Drawer.Screen name="OtherComponents" component={Draw} options={{
+        drawerLabel: onkeypress = ()=> { return null}
+      }} listeners={{
+      }}
+      
+      />
+    </Drawer.Navigator>
+) 
+function MyDrawer() {
+  return Navigator; 
 }
-export default class App extends React.Component {
 
-  nav() {
-    this.props.children
-  }
-
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Main" component={Main} />
-          <Stack.Screen name="Home" component={Home} />
-        </Stack.Navigator>
-      </NavigationContainer>
-
-    );
-  }
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+    
+  );
 }
+
