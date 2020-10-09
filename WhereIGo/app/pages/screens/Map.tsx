@@ -10,7 +10,10 @@ export default class Map extends React.Component{
     }
   }
 
+
  async componentDidMount(){
+  console.log(this.props)
+
     navigator.geolocation.getCurrentPosition(
 
       ({coords: {latitude, longitude}})=>{

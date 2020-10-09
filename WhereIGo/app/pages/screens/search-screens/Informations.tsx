@@ -36,7 +36,7 @@ export default function Informations(props: any) {
     console.log(informations)
     return <View style={{ position: 'absolute', height: dimensions.height }}>
         <Text style={{ position: 'relative', fontWeight: '700', color: '#777', padding: 10, margin:20, fontSize: 16, top: getNewPosition(0, 0, 20).top }}>
-            Até quantos quilômetros que você pretende se desviar da rota de destino? Caso você não escolha, por padrão o sistema adotará 5 km.
+            Selecione os tipos de lugares que você deseja conhecer. Para realizar a busca corretamente você deve selecionar pelo menos um tipo de lugar e no máxímo dez tipos de lugares. 
           </Text>
           <View style={{ position:'relative', top: getNewPosition(0,0,90).top}}>
           
