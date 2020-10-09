@@ -1,12 +1,7 @@
 import *  as React from 'react'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { View, Text, Button, Vibration } from 'react-native';
-import MainCustomButton from '../../../shared/buttons/MainCustomButton';
+import { View, Text }  from 'react-native';
 import SearchInput from '../../../shared/inputs/SearchInput';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { useNavigation } from '@react-navigation/native';
 import { getNewDimensions } from '../../../utils/dimansions/dimansions';
-import LocationModel from '../../../models/location.model';
 import MainCustomButtonParameter from '../../../shared/buttons/MainCustomButtonParameter';
 import MainReturnButton from '../../../shared/buttons/MainReturnButton';
 
@@ -15,10 +10,6 @@ export default function ConfigPlace() {
 
     const [origin, setOrigin] = React.useState();
     const [destiny, setDestiny] = React.useState();
-
-
-
-    const navigate = useNavigation();
 
     return (
         <View style={{ position: 'relative', flex: 1, top: '5%', width: '100%' }}>
