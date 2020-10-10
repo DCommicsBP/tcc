@@ -4,6 +4,7 @@ import SearchInput from '../../../shared/inputs/SearchInput';
 import { getNewDimensions } from '../../../utils/dimansions/dimansions';
 import MainCustomButtonParameter from '../../../shared/buttons/MainCustomButtonParameter';
 import MainReturnButton from '../../../shared/buttons/MainReturnButton';
+import LocationModel from '../../../models/location.model';
 
 
 export default function ConfigPlace() {
@@ -11,6 +12,7 @@ export default function ConfigPlace() {
     const [origin, setOrigin] = React.useState();
     const [destiny, setDestiny] = React.useState();
 
+    let teste = new LocationModel(); 
     return (
         <View style={{ position: 'relative', flex: 1, top: '5%', width: '100%' }}>
             <View style={{ position: 'absolute', top: '5%', width: '100%' }}>
