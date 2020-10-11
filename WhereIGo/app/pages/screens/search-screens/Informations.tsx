@@ -13,6 +13,9 @@ import MainCustomButtonParameter from "../../../shared/buttons/MainCustomButtonP
 import MainReturnButton from "../../../shared/buttons/MainReturnButton";
 
 export default function Informations(props: any) {
+
+    const {origin,  destiny, price,  kilometers} = props.route.params
+
     const dimensions = getNewDimensions(0, 30);
 
     const [information, setInformation] = useState([])
@@ -55,7 +58,7 @@ export default function Informations(props: any) {
         />
         </View>
         <View style={{ position: 'relative', left: getNewDimensions(15, 0).width, flex: 0.5, top: 270 }}>
-                { MainCustomButtonParameter('Classificação', 'Próximo ->', '#DDD', '#1C56E6', { ...props.route.params, information })}
+                { MainCustomButtonParameter('Classificação', 'Próximo ->', '#DDD', '#1C56E6', { origin: origin, destiny: destiny, price: price, kilometers: kilometers, information: information })}
                 {MainReturnButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
             </View>
 

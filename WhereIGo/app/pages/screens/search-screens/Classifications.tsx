@@ -10,6 +10,7 @@ import { getNewDimensions, getNewPosition } from '../../../utils/dimansions/dima
 
 export default function Classifications(props: any) {
 
+    const { origin, destiny, price, kilometers, information } = props.route.params
     const [rating, setRating] = useState(3)
 
     return (
@@ -25,7 +26,7 @@ export default function Classifications(props: any) {
             />
             </View>
             <View style={{ position: 'relative', left: getNewDimensions(15, 0).width, top: 270 }}>
-                { MainCustomButtonParameter('Mapa', 'Próximo ->', '#DDD', '#1C56E6', { ...props.route.params, rating })}
+                { MainCustomButtonParameter('Mapa', 'Próximo ->', '#DDD', '#1C56E6', { origin: origin, destiny: destiny, price: price, kilometers: kilometers, information: information , rating:rating })}
                 {MainReturnButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
             </View>
         </View>

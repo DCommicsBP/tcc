@@ -3,16 +3,17 @@ import { Text, View } from 'react-native';
 import MapView from 'react-native-maps'
 import MapViewDirections from 'react-native-maps-directions';
 import { env } from '../../enviroments/enviroments';
-import MainCustomButtonParameter from '../../shared/buttons/MainCustomButtonParameter';
-import MainReturnButton from '../../shared/buttons/MainReturnButton';
-import { getNewDimensions } from '../../utils/dimansions/dimansions';
+import LocationModel from '../../models/location.model';
+import GoogleServices from '../../services/GoogleServices';
 
 export default function Map(props: any) {
 
   const [region, setRegion] = React.useState({ latitudeDelta: 0, latitude: 0, longitudeDelta: 0, longitude: 0 });
 
   const [longitude, setLongitude] = React.useState(0)
+  
   const [latitude, setLatitude] = React.useState(0)
+  
   let [mapView, setMapView] = React.useState([null])
 
   const GOOGLE_MAPS_APIKEY = env.apiKey;
@@ -59,17 +60,27 @@ export default function Map(props: any) {
 
   const MappingDirection = () => {
 
+    const {origin, destiny, price, kilometers, information , rating} = props.route.params;
 
-    const { origin, destiny } = props.route.params;
-
+    console.log('props teste====> ',props.route.params)
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
+    console.log('places teste ===> ',origin, destiny, rating,information,price, kilometers)
 
-    function teste(teste2: any){
-      console.log('teste ===> ',teste2)
-      return "teste"; 
-    }
+    if(origin!= null && destiny != null && information!= null){
 
+
+   let places:any =  GoogleServices({
+     classification: rating, 
+     fromPlace: destiny, 
+     toPlace: origin, 
+     informations: information, 
+     paymentValue: price, 
+     placesArray:  mapView, 
+     kilometers:kilometers
+   });
+  }
+   
     return <View style={{ flex: 1, width: '85%', left: '5%', }}>
       <MapView style={{ flex: 0.7, width: '95%', left: '5%' }}
 
@@ -82,7 +93,7 @@ export default function Map(props: any) {
         maxZoomLevel={10}
         minZoomLevel={7}
         showsUserLocation
-
+  
       >
         <View>
           {DirectionsMap(origin, destiny)}
@@ -117,7 +128,9 @@ export default function Map(props: any) {
 
     console.log('map view antes de renderizar o mapa', mapView)
     let map = <MappingDirection />
-    console.log('map view depois de renderizar o mapa', mapView)
+    
+
+
     return map;
 
   } else {

@@ -1,13 +1,15 @@
+import LocationModel from "./location.model";
 import PlaceModel from "./place.model";
 
 export default interface SearchModel {
 
-    fromPlace: PlaceModel; 
-    toPlace: PlaceModel;
+    fromPlace: LocationModel; 
+    toPlace: LocationModel;
     paymentValue: number; 
-    quilometers: number;  
+    kilometers: number;  
     informations: Array<string>; 
-    placesType: Array<string>;
-    classification: number;  
+    classification: number; 
+    placesArray: Array<any>; 
+
 
 }

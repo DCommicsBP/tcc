@@ -10,9 +10,9 @@ export default function Kilometers(props: any) {
 
     const {price, origin, destiny} = props.route.params; 
 
-    const [kilometrs, setKilometrs] = useState("0")
+    const [kilometers, setKilometrs] = useState("0")
 
-    console.log('props kilometers', props)
+    console.log(' kilometers', kilometers)
     return <View>
         <View style={{position:'relative', width: '70%', left: '15%' }}>
             <Text style={{ position: 'relative', fontWeight: '700', color: '#777', top: 100,fontSize: 20 }}>
@@ -27,7 +27,7 @@ export default function Kilometers(props: any) {
             onChangeText={value => value.match(/[0-9]*/gm) && setKilometrs(value)}
           />
            <View style={{position:'absolute',  width: '140%', top: '180%',  }}>
-                { MainCustomButtonParameter('Informações', 'Próximo ->', '#DDD', '#1C56E6', { origin: origin, destiny: destiny, price: price, kilometers: kilometrs }) }
+                { MainCustomButtonParameter('Informações', 'Próximo ->', '#DDD', '#1C56E6', { origin: origin, destiny: destiny, price: price, kilometers: kilometers}) }
                 {MainReturnButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
             </View>
 

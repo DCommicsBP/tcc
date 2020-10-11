@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { env } from '../../enviroments/enviroments';
 import LocationModel from '../../models/location.model';
 
 export default function SearchInput (props: any) {
@@ -38,7 +39,7 @@ export default function SearchInput (props: any) {
         }}
           query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
-          key: 'AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY',
+          key: `${env.apiKey}`,
           language: 'pt-BR', // language of the results
           types: '(cities)',
            // default: 'geocode'
