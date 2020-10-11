@@ -37,11 +37,6 @@
         "googleMapsNameType": "bar"
     },
     {
-        "id": 12,
-        "nameTranslatedPortuguese": "Cafeteria",
-        "googleMapsNameType": "cafe"
-    },
-    {
         "id": 13,
         "nameTranslatedPortuguese": "Boliche",
         "googleMapsNameType": "bowling_alley"
@@ -62,11 +57,6 @@
         "googleMapsNameType": "church"
     },
     {
-        "id": 17,
-        "nameTranslatedPortuguese": "Loja de Conveniência",
-        "googleMapsNameType": "convenience_store"
-    },
-    {
         "id": 18,
         "nameTranslatedPortuguese": "Lojas de Roupas",
         "googleMapsNameType": "clothing_store"
@@ -76,28 +66,7 @@
         "nameTranslatedPortuguese": "Prefeitura",
         "googleMapsNameType": "city_hall"
     },
-    
-    {
-        "id": 21,
-        "nameTranslatedPortuguese": "Oficina de Carros",
-        "googleMapsNameType": "car_repair"
-    },
-    {
-        "id": 22,
-        "nameTranslatedPortuguese": "Aluguel de Carros",
-        "googleMapsNameType": "car_rental"
-    },
-    {
-        "id": 24,
-        "nameTranslatedPortuguese": "Campping",
-        "googleMapsNameType": "campground"
-    },
-    {
-        "id": 25,
-        "nameTranslatedPortuguese": "Loja de Bicicleta",
-        "googleMapsNameType": "bicycle_store"
-    },
-    {
+     {
         "id": 26,
         "nameTranslatedPortuguese": "Tribunal",
         "googleMapsNameType": "courthouse"
@@ -109,88 +78,23 @@
     },
     {
         "id": 30,
-        "nameTranslatedPortuguese": "Cemitério",
+        "nameTranslatedPortuguese": "Hospital",
         "googleMapsNameType": "hospital"
     },
     {
-        "id": 31,
-        "nameTranslatedPortuguese": "Igreja",
-        "googleMapsNameType": "home_goods_store"
-    },
-    {
-        "id": 32,
-        "nameTranslatedPortuguese": "Loja de Conveniência",
-        "googleMapsNameType": "hindu_temple"
-    },
-    {
-        "id": 33,
-        "nameTranslatedPortuguese": "Lojas de Roupas",
-        "googleMapsNameType": "hardware_store"
-    },
-    {
         "id": 34,
-        "nameTranslatedPortuguese": "Prefeitura",
+        "nameTranslatedPortuguese": "Cabelereiro",
         "googleMapsNameType": "hair_care"
     },
     {
         "id": 35,
-        "nameTranslatedPortuguese": "Lavagem Automotiva",
+        "nameTranslatedPortuguese": "Academia",
         "googleMapsNameType": "gym"
     },
     {
-        "id": 36,
-        "nameTranslatedPortuguese": "Oficina de Carros",
-        "googleMapsNameType": "gas_station"
-    },
-    {
-        "id": 37,
-        "nameTranslatedPortuguese": "Aluguel de Carros",
-        "googleMapsNameType": "furniture_store"
-    },
-    {
-        "id": 38,
-        "nameTranslatedPortuguese": "Loja de Carros",
-        "googleMapsNameType": "funeral_home"
-    },
-    {
-        "id": 39,
-        "nameTranslatedPortuguese": "Campping",
-        "googleMapsNameType": "florist"
-    },
-    {
         "id": 40,
-        "nameTranslatedPortuguese": "Loja de Bicicleta",
+        "nameTranslatedPortuguese": "Bombeiros",
         "googleMapsNameType": "fire_station"
-    },
-    {
-        "id": 41,
-        "nameTranslatedPortuguese": "Tribunal",
-        "googleMapsNameType": "embassy"
-    },
-    {
-        "id": 42,
-        "nameTranslatedPortuguese": "Dentista",
-        "googleMapsNameType": "electronics_store"
-    },
-    {
-        "id": 43,
-        "nameTranslatedPortuguese": "Loja de Departamento",
-        "googleMapsNameType": "electrician"
-    },
-    {
-        "id": 44,
-        "nameTranslatedPortuguese": "Loja de Departamento",
-        "googleMapsNameType": "drugstore"
-    },
-    {
-        "id": 45,
-        "nameTranslatedPortuguese": "Cemitério",
-        "googleMapsNameType": "movie_theater"
-    },
-    {
-        "id": 46,
-        "nameTranslatedPortuguese": "Igreja",
-        "googleMapsNameType": "movie_rental"
     },
     {
         "id": 47,
@@ -208,11 +112,6 @@
         "googleMapsNameType": "meal_delivery"
     },
     {
-        "id": 50,
-        "nameTranslatedPortuguese": "Lavagem Automotiva",
-        "googleMapsNameType": "lodging"
-    },
-    {
         "id": 51,
         "nameTranslatedPortuguese": "Oficina de Carros",
         "googleMapsNameType": "locksmith"
@@ -223,39 +122,9 @@
         "googleMapsNameType": "local_government_office"
     },
     {
-        "id": 53,
-        "nameTranslatedPortuguese": "Loja de Carros",
-        "googleMapsNameType": "liquor_store"
-    },
-    {
         "id": 54,
         "nameTranslatedPortuguese": "Campping",
         "googleMapsNameType": "light_rail_station"
-    },
-    {
-        "id": 55,
-        "nameTranslatedPortuguese": "Loja de Bicicleta",
-        "googleMapsNameType": "library"
-    },
-    {
-        "id": 56,
-        "nameTranslatedPortuguese": "Tribunal",
-        "googleMapsNameType": "lawyer"
-    },
-    {
-        "id": 57,
-        "nameTranslatedPortuguese": "Dentista",
-        "googleMapsNameType": "laundry"
-    },
-    {
-        "id": 58,
-        "nameTranslatedPortuguese": "Loja de Departamento",
-        "googleMapsNameType": "jewelry_store"
-    },
-    {
-        "id": 59,
-        "nameTranslatedPortuguese": "Loja de Departamento",
-        "googleMapsNameType": "insurance_agency"
     },
     {
         "id": 60,
@@ -273,34 +142,9 @@
         "googleMapsNameType": "post_office"
     },
     {
-        "id": 63,
-        "nameTranslatedPortuguese": "Polícia",
-        "googleMapsNameType": "police"
-    },
-    {
         "id": 64,
         "nameTranslatedPortuguese": "Pousadas e Hoteis",
         "googleMapsNameType": "lodging"
-    },
-    {
-        "id": 65,
-        "nameTranslatedPortuguese": "Hidráulico ou Encanador",
-        "googleMapsNameType": "plumber"
-    },
-    {
-        "id": 66,
-        "nameTranslatedPortuguese": "Fisioterapeuta",
-        "googleMapsNameType": "physiotherapist"
-    },
-    {
-        "id": 67,
-        "nameTranslatedPortuguese": "Loja de Animais",
-        "googleMapsNameType": "pet_store"
-    },
-    {
-        "id": 68,
-        "nameTranslatedPortuguese": "Estacionamento",
-        "googleMapsNameType": "parking"
     },
     {
         "id": 69,
@@ -383,24 +227,9 @@
         "googleMapsNameType": "stadium"
     },
     {
-        "id": 85,
-        "nameTranslatedPortuguese": "SPA",
-        "googleMapsNameType": "spa"
-    },
-    {
         "id": 86,
         "nameTranslatedPortuguese": "Zoológico",
         "googleMapsNameType": "zoo"
-    },
-    {
-        "id": 87,
-        "nameTranslatedPortuguese": "Clínica Veterinária",
-        "googleMapsNameType": "veterinary_care"
-    },
-    {
-        "id": 88,
-        "nameTranslatedPortuguese": "Universidade",
-        "googleMapsNameType": "university"
     },
     {
         "id": 89,
@@ -409,7 +238,7 @@
     },
     {
         "id": 90,
-        "nameTranslatedPortuguese": "Estaçaõ de Trem",
+        "nameTranslatedPortuguese": "Estação de Trem",
         "googleMapsNameType": "train_station"
     },
     {
