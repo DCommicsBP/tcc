@@ -24,11 +24,27 @@ export const configurationStyle = StyleSheet.create({
         top: '5%'
     },
 
-
     searchInput: {
         width: '90%', height: 50, backgroundColor: '#EEE', top: 20, paddingLeft: 10, paddingRight: 10,  marginLeft: 20, marginRight: 20, marginBottom: 5, marginTop: 5, borderWidth:1, borderColor:'#BBB'
 
     },
+    touchableOpacityView: {
+        position: 'relative', 
+        top: '15%', 
+        width: '90%', 
+        left: '5%',
+        height: '30%'
+    }, 
+    touchableOpacity: {
+        borderColor: '#CCC',
+        borderWidth: 5, 
+        height: 50,
+    },
+    opacity: {
+
+        margin: 5, 
+        padding: 10
+    }
 
 
 
