@@ -1,12 +1,12 @@
 
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
-import ConfigPlace from '../pages/screens/search-screens/Configurations';
-import Price from '../pages/screens/search-screens/Price';
-import Kilometers from '../pages/screens/search-screens/Kilometers';
-import Informations from '../pages/screens/search-screens/Informations';
-import Classifications from '../pages/screens/search-screens/Classifications';
 import Map from '../pages/screens/Map';
+import Price from '../pages/screens/search-screens/templates/Price';
+import Kilometers from '../pages/screens/search-screens/templates/Kilometers';
+import Informations from '../pages/screens/search-screens/templates/Informations';
+import Classifications from '../pages/screens/search-screens/templates/Classifications';
+import ConfigPlace from '../pages/screens/search-screens/templates/Configurations';
 
 const Stack = createStackNavigator();
 

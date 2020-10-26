@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import { Text, TextInputComponent, View } from "react-native";
-import { sin } from "react-native-reanimated";
-import api from '../../../services/TypeService';
-import axios from 'axios';
-import data from '../../../data/types.json'
-import PlaceModel from "../../../models/place.model";
-import TypeModel from "../../../models/type.model";
+import { Text,  View } from "react-native";
+import data from '../../../../data/types.json'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon } from "react-native-elements";
-import { getNewDimensions, getNewPosition } from "../../../utils/dimansions/dimansions";
-import MainCustomButtonParameter from "../../../shared/buttons/MainCustomButtonParameter";
-import MainReturnButton from "../../../shared/buttons/MainReturnButton";
+import { getNewDimensions, getNewPosition } from "../../../../utils/dimansions/dimansions";
+import MainCustomButtonParameter from "../../../../shared/buttons/MainCustomButtonParameter";
+import MainReturnButton from "../../../../shared/buttons/MainReturnButton";
 
 export default function Informations(props: any) {
     const dimensions = getNewDimensions(0, 30);
@@ -18,10 +13,7 @@ export default function Informations(props: any) {
     const [information, setInformation] = useState([])
 
     let items: { label: any; value: any; icon?: (() => JSX.Element) | undefined; disabled?: boolean | undefined; selected?: boolean | undefined; }[] = [];
-
-    let informations: any[] = [];
     data.map(d => {
-
         items.push({
             label: d.nameTranslatedPortuguese,
             value: d.googleMapsNameType,
@@ -29,7 +21,6 @@ export default function Informations(props: any) {
             disabled: false,
             selected: false
         })
-
     });
 
     console.log(information)

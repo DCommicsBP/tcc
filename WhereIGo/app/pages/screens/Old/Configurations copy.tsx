@@ -7,7 +7,7 @@ import MainReturnButton from '../../../shared/buttons/MainReturnButton';
 import LocationModel from '../../../models/location.model';
 
 
-export default function ConfigPlace() {
+export default function ConfigPlaceOld() {
 
     const [origin, setOrigin] = React.useState();
     const [destiny, setDestiny] = React.useState();

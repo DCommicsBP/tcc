@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { AirbnbRating, Rating } from 'react-native-ratings';
-import MainCustomButtonParameter from '../../../shared/buttons/MainCustomButtonParameter';
-import MainReturnButton from '../../../shared/buttons/MainReturnButton';
-import { getNewDimensions, getNewPosition } from '../../../utils/dimansions/dimansions';
+import MainCustomButtonParameter from '../../../../shared/buttons/MainCustomButtonParameter';
+import MainReturnButton from '../../../../shared/buttons/MainReturnButton';
+import { getNewDimensions, getNewPosition } from '../../../../utils/dimansions/dimansions';
 
 
 

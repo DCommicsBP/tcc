@@ -15,10 +15,16 @@ export default function SearchInput (props: any) {
   
 
         return <GooglePlacesAutocomplete
-    
-        onChangeText={ ()=> {
-          
+        onFail={error => console.error(error)}
+        query={{
+          // available options: https://developers.google.com/places/web-service/autocomplete
+          key: 'AIzaSyD0u9dduhBUFih880zKhr8k2nndhWgbRY8',
+          language: 'pt-BR', // language of the results
+          types: '(cities)',
+           // default: 'geocode'
         }}
+
+            
         onPress={(data, details = null) => {
           props.onSubmit(details)
           details?.geometry
@@ -36,14 +42,7 @@ export default function SearchInput (props: any) {
         GooglePlacesDetailsQuery={{
 
         }}
-          query={{
-          // available options: https://developers.google.com/places/web-service/autocomplete
-          key: 'AIzaSyBl_UJ_MQziKKhB-GB2MIVrXrhUwlX6IyY',
-          language: 'pt-BR', // language of the results
-          types: '(cities)',
-           // default: 'geocode'
-        }}
-        
+   
         textInputProps={{
           autoCapitalize:'none', 
           autoCorrect: false
