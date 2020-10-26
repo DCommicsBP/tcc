@@ -4,6 +4,7 @@ import { AirbnbRating, Rating } from 'react-native-ratings';
 import MainCustomButtonParameter from '../../../../shared/buttons/MainCustomButtonParameter';
 import MainReturnButton from '../../../../shared/buttons/MainReturnButton';
 import { getNewDimensions, getNewPosition } from '../../../../utils/dimansions/dimansions';
+import { classificationsStyle } from '../styles/classification.style'
 
 
 
@@ -13,21 +14,26 @@ export default function Classifications(props: any) {
     const [rating, setRating] = useState(3)
 
     return (
-        <View>
+        <View style={classificationsStyle.main}>
 
-            <Text style={{ position: 'absolute', fontWeight: '700', color: '#777', padding: 10, margin: 20, fontSize: 16, top: getNewPosition(0, 0, 20).top }}>
-                Você poderá buscar os lugares que desejas através da avaliação disponível. 
+            <View style={classificationsStyle.viewTitle}>
+            <Text style={classificationsStyle.title}>
+                Você poderá buscar os lugares que desejas através da avaliação disponível.
           </Text>
-            <View style={{ position: 'relative', top: getNewPosition(0, 0, 120).top}}>
-            <AirbnbRating
-                reviews={["Péssimo", "Ruim", "Mais ou Menos", "Bom", "Ótimo"]}
-                onFinishRating={(rating) => setRating(rating)}
-            />
             </View>
-            <View style={{ position: 'relative', left: getNewDimensions(15, 0).width, top: 270 }}>
-                { MainCustomButtonParameter('Mapa', 'Próximo ->', '#DDD', '#1C56E6', { ...props.route.params, rating })}
-                {MainReturnButton('Início', 'Retornar', '#0768CD', '#8FC1F5')}
+            
+            <View style={classificationsStyle.rating}>
+                <AirbnbRating
+                    reviews={["Péssimo", "Ruim", "Mais ou Menos", "Bom", "Ótimo"]}
+                    onFinishRating={(rating) => setRating(rating)}
+                />
             </View>
+            
+            <View style={{ position: 'absolute', left: getNewDimensions(15, 0).width, flex: 0.5, top: '80%', width:'100%' }}>
+                {MainCustomButtonParameter('Mapa', 'Próximo ->', '#FFF', '#AAA', { ...props.route.params, rating })}
+                {MainReturnButton('Início', 'Retornar', '#CCC', '#FFF')}
+            </View>
+            
         </View>
     );
 
