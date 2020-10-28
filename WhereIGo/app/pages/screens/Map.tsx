@@ -1,9 +1,10 @@
 import Axios from 'axios';
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import MapView, { Marker, Polygon, Polyline } from 'react-native-maps'
-import LocationModel from '../../models/location.model';
 import { PolylineModel } from '../../models/polyline.model';
+import TemplateCards from './search-find/TemplateCards';
 
 export default function MapOld(props: any) {
 
@@ -14,6 +15,12 @@ export default function MapOld(props: any) {
   const [latitude, setLatitude] = React.useState(0)
 
   let [mapView, setMapView] = React.useState([null])
+
+  const [places, setPlaces] = React.useState([
+    {
+      id: 1, description: 'Teste mais um teste', title: 'Titulo'
+    }
+  ])
 
   const [isTracking, setIsTracking] = React.useState(true);
   const [isTrackingRoute, setIsTrackingRoute] = React.useState(true);
@@ -43,21 +50,15 @@ export default function MapOld(props: any) {
     return () => clearInterval(getLocationInterval);
   }, [isTracking]);
 
-
   const Mapping = () => {
     return <MapView style={{ flex: 1, width: '85%', left: '5%' }}
-      region={region}
-      showsUserLocation
-      zoomControlEnabled
-      maxZoomLevel={6}
-      minZoomLevel={6}
-      zoomTapEnabled
-      zoomEnabled
+      region={region} showsUserLocation
+      zoomControlEnabled maxZoomLevel={6}
+      minZoomLevel={6} zoomTapEnabled zoomEnabled
     >
     </MapView>
   }
   let polyline: PolylineModel[] = []
-
   const MappingDirection = () => {
     const { origin, destiny } = props.route.params;
     Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
@@ -76,39 +77,76 @@ export default function MapOld(props: any) {
         if (isTrackingRoute)
           setRoutes(polyline)
       });
-
-
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
-
-    return <MapView style={{ flex: 1, width: '85%', left: '5%' }}
-            region={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.05,
-              longitudeDelta: 0.02
-            }}
-            maxZoomLevel={7}
-            minZoomLevel={2}
-            showsUserLocation
-          >
-            <View>
-              <Polyline coordinates={routes}
-                geodesic
-                strokeWidth={5}
-                strokeColor={"#9E8868"}
-              />
-              <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
-              <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-            </View>
-         </MapView>
+    return  <View style={styles.container}>
+    <MapView
+      style={styles.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
+        region={{
+          latitude: latitude, longitude: longitude, latitudeDelta: 0.05, longitudeDelta: 0.02
+        }}
+    >
+        <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
+        <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
+      <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}
+      />
+    </MapView>
+    <ScrollView style={styles.placesContainer} horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
+        <TemplateCards origin={origin} destiny={destiny}/>
+    </ScrollView>
+    </View>
   }
 
-  if (typeof props.route != 'undefined') {
+  if (typeof props.route != 'undefined') 
     return <MappingDirection />
-  } else {
+   else
     return <Mapping />
-  }
-
 }
 
+const { height, width } = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
+
+  mapView: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    bottom: 0,
+  },
+
+  placesContainer: {
+    width: '90%',
+    maxHeight: 200,
+    height: 200,
+    position: 'absolute',
+    backgroundColor:'#EEE', 
+    right: '5%',
+  },
+
+  place: {
+    width: width - 40,
+    maxHeight: 200,
+    backgroundColor: '#FFF',
+    marginHorizontal: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    padding: 20,
+  },
+
+  title: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    backgroundColor: 'transparent',
+  },
+
+  description: {
+    color: '#999',
+    fontSize: 12,
+    marginTop: 5,
+  },
+});

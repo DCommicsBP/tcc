@@ -6,11 +6,7 @@ import MainReturnButton from '../../../../shared/buttons/MainReturnButton';
 import { getNewDimensions, getNewPosition } from '../../../../utils/dimansions/dimansions';
 import { classificationsStyle } from '../styles/classification.style'
 
-
-
-
 export default function Classifications(props: any) {
-
     const [rating, setRating] = useState(3)
 
     return (

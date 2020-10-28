@@ -11,3 +11,4 @@ export default interface SearchModel {
     classification: number;  
 
 }
+
