@@ -1,22 +1,25 @@
+import Axios from 'axios';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import MapView from 'react-native-maps'
-import MapViewDirections from 'react-native-maps-directions';
-import { env } from '../../enviroments/enviroments';
+import MapView, { Marker, Polygon, Polyline } from 'react-native-maps'
+import LocationModel from '../../models/location.model';
+import { PolylineModel } from '../../models/polyline.model';
 
-export default function Map(props: any) {
+export default function MapOld(props: any) {
 
   const [region, setRegion] = React.useState({ latitudeDelta: 0, latitude: 0, longitudeDelta: 0, longitude: 0 });
 
   const [longitude, setLongitude] = React.useState(0)
+
   const [latitude, setLatitude] = React.useState(0)
+
   let [mapView, setMapView] = React.useState([null])
 
-  const GOOGLE_MAPS_APIKEY = env.apiKey;
-
   const [isTracking, setIsTracking] = React.useState(true);
+  const [isTrackingRoute, setIsTrackingRoute] = React.useState(true);
 
-
+  let poly: PolylineModel[] = []
+  const [routes, setRoutes] = React.useState(poly)
 
   React.useEffect(() => {
     if (!isTracking) return;
@@ -53,45 +56,59 @@ export default function Map(props: any) {
     >
     </MapView>
   }
+  let polyline: PolylineModel[] = []
 
   const MappingDirection = () => {
-
-
     const { origin, destiny } = props.route.params;
+    Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
+      "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
+      .then(response => {
+        if (response.data != null) {
+          response.data.forEach((element: any) => {
+            let ele: PolylineModel = {
+              latitude: element.lat,
+              longitude: element.lng
+            }
+            polyline.push(ele);
+          });
+          setIsTrackingRoute(false)
+        }
+        if (isTrackingRoute)
+          setRoutes(polyline)
+      });
+
 
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
 
-    function teste(teste2: any){
-      console.log('teste ===> ',teste2)
-      return "teste"; 
-    }
-
-    return <View style={{ flex: 1, width: '85%', left: '5%', }}>
-          <MapView style={{ flex: 0.7, width: '95%', left: '5%' }}
-
+    return <MapView style={{ flex: 1, width: '85%', left: '5%' }}
             region={{
-              latitude: (origin.lat + destiny.lat) / 2,
-              longitude: (origin.lng + destiny.lng) / 2,
+              latitude: latitude,
+              longitude: longitude,
               latitudeDelta: 0.05,
               longitudeDelta: 0.02
             }}
-            maxZoomLevel={10}
-            minZoomLevel={7}
+            maxZoomLevel={7}
+            minZoomLevel={2}
             showsUserLocation
-
           >
-        <View>
-       
-        </View>
-    
-      </MapView>
-
-    </View>
+            <View>
+              <Polyline coordinates={routes}
+                geodesic
+                strokeWidth={5}
+                strokeColor={"#9E8868"}
+              />
+              <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
+              <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
+            </View>
+         </MapView>
   }
 
-
+  if (typeof props.route != 'undefined') {
+    return <MappingDirection />
+  } else {
     return <Mapping />
+  }
 
 }
 
