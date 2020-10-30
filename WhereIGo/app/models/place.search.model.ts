@@ -2,14 +2,16 @@ import LocationModel from "./location.model";
 
 export default interface PlaceSearchModel {
     
-    distance: number; 
-    rating: number; 
-    coordinates: LocationModel; 
-    reviewCount: number; 
-    price: number; 
-    phone: string; 
+    image:string;
+    coordinates:LocationModel;
+    phone:string;
+    address: string;
+    state:string;
+    city:string;
+    cep:string;
+    country:string;
+    isClosed:boolean;
+    rating:string;
+    price:string;
     name: string;
-    address: string; 
-    isClosed: boolean; 
-    image: string; 
 }

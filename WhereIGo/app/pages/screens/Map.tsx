@@ -60,7 +60,11 @@ export default function MapOld(props: any) {
   }
   let polyline: PolylineModel[] = []
   const MappingDirection = () => {
-    const { origin, destiny } = props.route.params;
+    console.log(props.route.params)
+
+    debugger
+    const { origin, destiny, price, rating, kilometers , information} = props.route.params;
+    
     Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
       "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
       .then(response => {
@@ -79,6 +83,7 @@ export default function MapOld(props: any) {
       });
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
+
     return  <View style={styles.container}>
     <MapView
       style={styles.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
@@ -92,7 +97,7 @@ export default function MapOld(props: any) {
       />
     </MapView>
     <ScrollView style={styles.placesContainer} horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
-        <TemplateCards origin={origin} destiny={destiny}/>
+        <TemplateCards origin={origin} destiny={destiny} routes={routes}  price={price} rating={rating} kilometers={kilometers} information={ information } />
     </ScrollView>
     </View>
   }

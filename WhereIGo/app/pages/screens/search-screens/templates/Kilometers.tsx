@@ -11,7 +11,7 @@ export default function Kilometers(props: any) {
 
     const {price, origin, destiny} = props.route.params; 
 
-    const [kilometrs, setKilometrs] = useState("0")
+    const [kilometrs, setKilometrs] = useState("5")
 
     console.log('props kilometers', props)
     return <View style={kilometrsStyle.mainView}>
