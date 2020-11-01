@@ -1,10 +1,10 @@
 import Axios from 'axios';
 import * as React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import MapView, { Marker, Polygon, Polyline } from 'react-native-maps'
+import { View } from 'react-native';
+import MapView, { Marker, Polyline } from 'react-native-maps'
 import { PolylineModel } from '../../models/polyline.model';
-import TemplateCards from './search-find/TemplateCards';
+import { mapStyle } from '../styles/map.style';
+import TemplateCards from './search-find/templates/TemplateCards';
 
 export default function MapOld(props: any) {
 
@@ -14,13 +14,8 @@ export default function MapOld(props: any) {
 
   const [latitude, setLatitude] = React.useState(0)
 
-  const [places, setPlaces] = React.useState([
-    {
-      id: 1, description: 'Teste mais um teste', title: 'Titulo'
-    }
-  ])
-
   const [isTracking, setIsTracking] = React.useState(true);
+
   const [isTrackingRoute, setIsTrackingRoute] = React.useState(true);
 
   let poly: PolylineModel[] = []
@@ -38,7 +33,6 @@ export default function MapOld(props: any) {
             longitudeDelta: 0
           });
           setIsTracking(false)
-
         },
         error => alert(error.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -87,9 +81,9 @@ export default function MapOld(props: any) {
 
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
-    return <View style={styles.container}>
+    return <View style={mapStyle.container}>
       <MapView
-        style={styles.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
+        style={mapStyle.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
         region={{
           latitude: latitude, longitude: longitude, latitudeDelta: 0.05, longitudeDelta: 0.02
         }}>
@@ -97,7 +91,7 @@ export default function MapOld(props: any) {
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
         <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>
       </MapView>
-      <View style={styles.placesContainer}>
+      <View style={mapStyle.placesContainer}>
       <TemplateCards origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
       </View>
     </View>
@@ -108,36 +102,3 @@ export default function MapOld(props: any) {
   else
     return <Mapping />
 }
-
-const { height, width } = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    backgroundColor: 'transparent'
-  },
-  placesContainer: {
-    width: '100%', 
-    marginHorizontal: 20, 
-  },
-
-  mapView: {
-    position: 'absolute',
-    top: 0, left: 0, right: 0,
-    bottom: 0,
-  },
-
-  title: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    backgroundColor: 'transparent',
-  },
-
-  description: {
-    color: '#999',
-    fontSize: 12,
-    marginTop: 5,
-  },
-});

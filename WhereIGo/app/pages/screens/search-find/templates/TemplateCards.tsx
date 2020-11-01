@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import * as React from 'react';
 import Axios from "axios";
-import PlaceSearchModel from "../../../models/place.search.model";
+import PlaceSearchModel from "../../../../models/place.search.model";
 import Card from "./Card";
 import { ScrollView } from "react-native-gesture-handler";
-
 
 export default function TemplateCards(props: any) {
 
@@ -64,14 +63,8 @@ export default function TemplateCards(props: any) {
                 isClosed: false
 
             }
-            let placeString: string = JSON.stringify(place)
             return <Card  key={index+''} props={place} />
             }): <View><Text>{message}</Text></View>}
         </ScrollView>
         
 }
-
-
-const styles=StyleSheet.create({
- 
-})
