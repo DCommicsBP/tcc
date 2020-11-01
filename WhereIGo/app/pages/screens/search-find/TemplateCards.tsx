@@ -48,7 +48,7 @@ export default function TemplateCards(props: any) {
 
     gateSearch()
     console.log('places ====> ', placesSearch)
-    return<ScrollView style={styles.placesContainer} horizontal pagingEnabled showsHorizontalScrollIndicator={true}  >
+    return<ScrollView style={{}} horizontal pagingEnabled showsHorizontalScrollIndicator={false}  >
             {placesSearch.length > 0? placesSearch.map((element:any, index: number)=>{ 
             console.log('element', element)
             let place:PlaceSearchModel ={
@@ -75,12 +75,5 @@ export default function TemplateCards(props: any) {
 
 
 const styles=StyleSheet.create({
- placesContainer: {
-    maxHeight: 200,
-    height: 200,
-    position: 'relative',
-    
-
-  },
-
+ 
 })

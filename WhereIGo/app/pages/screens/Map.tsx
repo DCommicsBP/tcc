@@ -100,7 +100,10 @@ export default function MapOld(props: any) {
         <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}
         />
       </MapView>
+      <View style={styles.placesContainer}>
       <TemplateCards origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
+
+      </View>
     </View>
   }
 
@@ -116,25 +119,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'flex-end', 
+    alignItems: 'flex-end',
     backgroundColor: 'transparent'
+  },
+  placesContainer: {
+    width: '100%', 
+    marginHorizontal: 20, 
   },
 
   mapView: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    top: 0, left: 0, right: 0,
     bottom: 0,
-  },
-
-  place: {
-    width: width ,
-    maxHeight: 200,
-    backgroundColor: '#FFF',
-    marginHorizontal: 20,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    padding: 20,
   },
 
   title: {
