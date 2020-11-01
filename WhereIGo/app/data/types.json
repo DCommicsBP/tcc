@@ -4,6 +4,11 @@
         "nameTranslatedPortuguese": "Aeroporto",
         "googleMapsNameType": "airport"
     },
+    {
+        "id": 1,
+        "nameTranslatedPortuguese": "Estação de Trem",
+        "googleMapsNameType": "train+Station"
+    },
     
     {
         "id": 6,
@@ -37,8 +42,8 @@
     },
     {
         "id": 14,
-        "nameTranslatedPortuguese": "Livraria",
-        "googleMapsNameType": "book_store"
+        "nameTranslatedPortuguese": "Livraria e Papelaria",
+        "googleMapsNameType": "book+Store"
     },
     {
         "id": 15,
@@ -51,34 +56,14 @@
         "googleMapsNameType": "church"
     },
     {
-        "id": 17,
-        "nameTranslatedPortuguese": "Loja de Conveniência",
-        "googleMapsNameType": "convenience_store"
-    },
-    {
         "id": 19,
         "nameTranslatedPortuguese": "Prefeitura",
-        "googleMapsNameType": "city_hall"
-    },
-    {
-        "id": 21,
-        "nameTranslatedPortuguese": "Oficina de Carros",
-        "googleMapsNameType": "car_repair"
-    },
-    {
-        "id": 22,
-        "nameTranslatedPortuguese": "Aluguel de Carros",
-        "googleMapsNameType": "car_rental"
+        "googleMapsNameType": "cityhall"
     },
     {
         "id": 24,
         "nameTranslatedPortuguese": "Campping",
         "googleMapsNameType": "campground"
-    },
-    {
-        "id": 25,
-        "nameTranslatedPortuguese": "Loja de Bicicleta",
-        "googleMapsNameType": "bicycle_store"
     },
     {
         "id": 26,
@@ -91,24 +76,9 @@
         "googleMapsNameType": "doctor"
     },
     {
-        "id": 59,
-        "nameTranslatedPortuguese": "Loja de Departamento",
-        "googleMapsNameType": "insurance_agency"
-    },
-    {
         "id": 60,
         "nameTranslatedPortuguese": "Restaurante",
-        "googleMapsNameType": "restaurant"
-    },
-    {
-        "id": 61,
-        "nameTranslatedPortuguese": "Imobiliáia",
-        "googleMapsNameType": "real_estate_agency"
-    },
-    {
-        "id": 62,
-        "nameTranslatedPortuguese": "Posto Policial",
-        "googleMapsNameType": "post_office"
+        "googleMapsNameType": "food"
     },
     {
         "id": 63,
@@ -126,44 +96,19 @@
         "googleMapsNameType": "park"
     },
     {
-        "id": 71,
-        "nameTranslatedPortuguese": "Casa Noturna",
-        "googleMapsNameType": "night_club"
-    },
-    {
-        "id": 72,
-        "nameTranslatedPortuguese": "Museu",
-        "googleMapsNameType": "museum"
-    },
-    {
-        "id": 75,
-        "nameTranslatedPortuguese": "Farmácia",
-        "googleMapsNameType": "pharmacy"
-    },
-    {
         "id": 76,
         "nameTranslatedPortuguese": "Escolas",
         "googleMapsNameType": "school"
     },
     {
-        "id": 77,
-        "nameTranslatedPortuguese": "Camping para Trailers e Motorhomes",
-        "googleMapsNameType": "rv_park"
-    },
-    {
         "id": 78,
         "nameTranslatedPortuguese": "Shopping",
-        "googleMapsNameType": "shopping_mall"
-    },
-    {
-        "id": 79,
-        "nameTranslatedPortuguese": "Sinagoga",
-        "googleMapsNameType": "synagogue"
+        "googleMapsNameType": "shopping"
     },
     {
         "id": 81,
         "nameTranslatedPortuguese": "Supermercado",
-        "googleMapsNameType": "supermarket"
+        "googleMapsNameType": "market"
     },
     {
         "id": 82,
@@ -190,12 +135,7 @@
         "nameTranslatedPortuguese": "Zoológico",
         "googleMapsNameType": "zoo"
     },
-    {
-        "id": 87,
-        "nameTranslatedPortuguese": "Clínica Veterinária",
-        "googleMapsNameType": "veterinary_care"
-    },
-    {
+        {
         "id": 88,
         "nameTranslatedPortuguese": "Universidade",
         "googleMapsNameType": "university"
@@ -203,16 +143,11 @@
     {
         "id": 89,
         "nameTranslatedPortuguese": "Agência de Viagem",
-        "googleMapsNameType": "travel_agency"
-    },
-    {
-        "id": 90,
-        "nameTranslatedPortuguese": "Estação de Trem",
-        "googleMapsNameType": "train_station"
+        "googleMapsNameType": "travel+Agency"
     },
     {
         "id": 91,
         "nameTranslatedPortuguese": "Atração Turística",
-        "googleMapsNameType": "tourist_attraction"
+        "googleMapsNameType": "tourist+Attraction"
     }
 ]

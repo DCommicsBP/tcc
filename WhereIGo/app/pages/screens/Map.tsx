@@ -14,8 +14,6 @@ export default function MapOld(props: any) {
 
   const [latitude, setLatitude] = React.useState(0)
 
-  let [mapView, setMapView] = React.useState([null])
-
   const [places, setPlaces] = React.useState([
     {
       id: 1, description: 'Teste mais um teste', title: 'Titulo'
@@ -63,48 +61,52 @@ export default function MapOld(props: any) {
     console.log(props.route.params)
 
     debugger
-    const { origin, destiny, price, rating, kilometers , information} = props.route.params;
-    
-    Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
-      "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
-      .then(response => {
-        if (response.data != null) {
-          response.data.forEach((element: any) => {
-            let ele: PolylineModel = {
-              latitude: element.lat,
-              longitude: element.lng
+    const { origin, destiny, price, rating, kilometers, information } = props.route.params;
+
+    React.useEffect(() => {
+
+      if (routes.length == 0) {
+        Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
+          "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
+          .then(response => {
+            if (response.data != null) {
+              response.data.forEach((element: any) => {
+                let ele: PolylineModel = {
+                  latitude: element.lat,
+                  longitude: element.lng
+                }
+                polyline.push(ele);
+              });
+              setIsTrackingRoute(false)
             }
-            polyline.push(ele);
+            if (isTrackingRoute)
+              setRoutes(polyline)
           });
-          setIsTrackingRoute(false)
-        }
-        if (isTrackingRoute)
-          setRoutes(polyline)
-      });
+      }
+    }, [isTrackingRoute, routes])
+
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
 
-    return  <View style={styles.container}>
-    <MapView
-      style={styles.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
+    return <View style={styles.container}>
+      <MapView
+        style={styles.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
         region={{
           latitude: latitude, longitude: longitude, latitudeDelta: 0.05, longitudeDelta: 0.02
         }}
-    >
+      >
         <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-      <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}
-      />
-    </MapView>
-    <ScrollView style={styles.placesContainer} horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
-        <TemplateCards origin={origin} destiny={destiny} routes={routes}  price={price} rating={rating} kilometers={kilometers} information={ information } />
-    </ScrollView>
+        <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}
+        />
+      </MapView>
+      <TemplateCards origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
     </View>
   }
 
-  if (typeof props.route != 'undefined') 
+  if (typeof props.route != 'undefined')
     return <MappingDirection />
-   else
+  else
     return <Mapping />
 }
 
@@ -114,27 +116,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end', 
+    backgroundColor: 'transparent'
   },
 
   mapView: {
-    position: 'relative',
+    position: 'absolute',
     width: '100%',
     height: '100%',
     bottom: 0,
   },
 
-  placesContainer: {
-    width: '90%',
-    maxHeight: 200,
-    height: 200,
-    position: 'absolute',
-    backgroundColor:'#EEE', 
-    right: '5%',
-  },
-
   place: {
-    width: width - 40,
+    width: width ,
     maxHeight: 200,
     backgroundColor: '#FFF',
     marginHorizontal: 20,

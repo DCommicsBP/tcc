@@ -3,7 +3,6 @@ import *  as React from 'react'
 import { View, Text } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import LocalSearchModel from '../../../../models/local.search.model';
-import LocationModel from '../../../../models/location.model';
 import MainCustomButtonParameter from '../../../../shared/buttons/MainCustomButtonParameter';
 import MainReturnButton from '../../../../shared/buttons/MainReturnButton';
 import { getNewDimensions } from '../../../../utils/dimansions/dimansions';
@@ -13,8 +12,6 @@ export default function ConfigPlace() {
 
     const [origin, setOrigin] = React.useState();
     const [destiny, setDestiny] = React.useState();
-    const [list, setList] = React.useState([]);
-    const [search, setSearch] = React.useState("");
     const [require, setRequire ] = React.useState(new LocalSearchModel());
     const [textInputValueOrigin, setTextInputValueOrigin] = React.useState("") 
     const [textInputValueDestiny, setTextInputValueDestiny] = React.useState("") 
@@ -22,6 +19,7 @@ export default function ConfigPlace() {
     const getPlaces = ( text: string, type: string) => {
         if(type === 'origin') setTextInputValueOrigin(text) 
         if(type=== 'destiny') setTextInputValueDestiny(text)
+        if(text.length >4){
 
         Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/nominatim/search-box-cicties/{text}?text="+text)
         .then(response=>{
@@ -29,14 +27,15 @@ export default function ConfigPlace() {
             let requireInternal = new LocalSearchModel(); 
             requireInternal.places =filteredResponse.filter(element=> element!=null);  
             requireInternal.type = type; 
+           
             setRequire(requireInternal)
         })
         .catch(error=>{
             setRequire(new LocalSearchModel())
         })
     }
-        //truncar em 46 caracteres
-
+    //truncar em 46 caracteres 
+    }
     const select = (object: any, type: string) =>{
         
         if(require.type === "destiny"){
