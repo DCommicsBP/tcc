@@ -87,22 +87,18 @@ export default function MapOld(props: any) {
 
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
-
     return <View style={styles.container}>
       <MapView
         style={styles.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
         region={{
           latitude: latitude, longitude: longitude, latitudeDelta: 0.05, longitudeDelta: 0.02
-        }}
-      >
+        }}>
         <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-        <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}
-        />
+        <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>
       </MapView>
       <View style={styles.placesContainer}>
       <TemplateCards origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
-
       </View>
     </View>
   }

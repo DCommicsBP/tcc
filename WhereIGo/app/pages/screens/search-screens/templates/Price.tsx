@@ -45,7 +45,7 @@ export default function Price(props: any) {
         </View>
         : <View></View>}
    
-   <View style={{ position: 'absolute', left: getNewDimensions(15, 0).width, flex: 0.5, top: '75%', width:'100%' }}>
+   <View style={{ position: 'absolute', left: getNewDimensions(15, 0).width, flex: 0.5, top: '70%', width:'100%' }}>
                 {MainCustomButtonParameter('Distância', 'Próximo ->', '#FFF', '#AAA', { origin: origin, destiny: destiny, price: price })}
                 {MainReturnButton('Orgiem/Destino', 'Retornar', '#CCC', '#FFF')}
             </View>

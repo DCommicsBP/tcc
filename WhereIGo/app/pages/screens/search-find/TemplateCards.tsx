@@ -20,8 +20,6 @@ export default function TemplateCards(props: any) {
         inf += element + ","
     });
 
-
-
     const gateSearch = () => {
         React.useEffect(() => {
             if(placesBreak) return; 

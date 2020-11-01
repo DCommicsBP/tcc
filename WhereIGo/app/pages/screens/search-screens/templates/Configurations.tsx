@@ -83,7 +83,7 @@ export default function ConfigPlace() {
                     </View>
                 )):<View></View>}
             </View>
-            <View style={{ position: 'absolute', left: getNewDimensions(15, 0).width, flex: 0.5, top: '80%', width:'100%' }}>
+            <View style={{ position: 'absolute', left: getNewDimensions(15, 0).width, flex: 0.5, top: '70%', width:'100%' }}>
                 {origin && destiny? MainCustomButtonParameter('Valores', 'Próximo ->', '#FFF', '#AAA', { origin: origin, destiny: destiny }): <Text></Text>}
                 {MainReturnButton('Início', 'Retornar', '#CCC', '#FFF')}
             </View>
