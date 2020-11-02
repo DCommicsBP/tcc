@@ -9,13 +9,11 @@ export const cardStyles = StyleSheet.create({
         marginHorizontal: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        borderBottomLeftRadius: 10,
-        borderTopEndRadius: 10,
-        borderBottomEndRadius: 10,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20, 
         padding: 20,
         left: 20,
         right: 0,
-        top: -10
     },
     text: {
         fontFamily: 'monospace',

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import { getNewDimensions } from "../../utils/dimansions/dimansions"
+import { getNewDimensions } from "../../../utils/dimansions/dimansions"
 
 
 export const searchStyle = StyleSheet.create({

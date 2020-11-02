@@ -1,11 +1,10 @@
 
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer'
-import Search from './app/pages/screens/Search';
-import LastSearch from './app/pages/screens/LastSearch';
-import Home from './app/pages/screens/Home';
+import Home from './app/pages/screens/templates/Home';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Draw from './app/routes/search.routes';
+import Search from './app/pages/screens/templates/Search';
 
 const Drawer = createDrawerNavigator();
 export const Navigator = (
@@ -16,7 +15,6 @@ export const Navigator = (
     >
       <Drawer.Screen name="Início" component={Home} />
       <Drawer.Screen name="Nova Busca" component={Search} />
-      <Drawer.Screen name="Última Busca" component={LastSearch} />
       <Drawer.Screen name="OtherComponents" component={Draw} options={{
         drawerLabel: onkeypress = ()=> { return null}
       }} listeners={{

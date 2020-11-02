@@ -9,9 +9,6 @@ import MainReturnButton from "../../../../shared/buttons/MainReturnButton";
 import { informationsStyle } from "../styles/informations.style";
 
 export default function Informations(props: any) {
-
-    const dimensions = getNewDimensions(0, 30);
-
     const [information, setInformation] = useState([])
 
     let items: { label: any; value: any; icon?: (() => JSX.Element) | undefined; disabled?: boolean | undefined; selected?: boolean | undefined; }[] = [];

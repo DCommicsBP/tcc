@@ -19,6 +19,11 @@ export default function TemplateCards(props: any) {
         inf += element + ","
     });
 
+    const setCoordinates= (c: any)=> {
+        props.newMarker(c)
+        console.log('cooordinates template ===> ', c)
+    }
+
     const gateSearch = () => {
         React.useEffect(() => {
             if(placesBreak) return; 
@@ -35,7 +40,7 @@ export default function TemplateCards(props: any) {
                 })
                 .catch(error => {
                     console.log('ERRROOOOO', error)
-                    setMessage("Não foi possível encontrar as informações no momento. Aguarda mais um instante. ")
+                    setMessage("Não foi possível encontrar as informações no momento. Aguarde mais um instante. ")
                 })
             }
 
@@ -44,7 +49,6 @@ export default function TemplateCards(props: any) {
     }
 
     gateSearch()
-    console.log('places ====> ', placesSearch)
     return<ScrollView style={{}} horizontal pagingEnabled showsHorizontalScrollIndicator={false}  >
             {placesSearch.length > 0? placesSearch.map((element:any, index: number)=>{ 
             console.log('element', element)
@@ -63,7 +67,7 @@ export default function TemplateCards(props: any) {
                 isClosed: false
 
             }
-            return <Card  key={index+''} props={place} />
+            return <Card  key={index+''} props={place} coordinates={(c:any)=> setCoordinates(c)} />
             }): <View><Text>{message}</Text></View>}
         </ScrollView>
         

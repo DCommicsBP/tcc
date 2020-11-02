@@ -2,23 +2,21 @@ import Axios from 'axios';
 import * as React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps'
-import { PolylineModel } from '../../models/polyline.model';
+import { set } from 'react-native-reanimated';
+import { PolylineModel } from '../../../models/polyline.model';
+import TemplateCards from '../search-find/templates/TemplateCards';
 import { mapStyle } from '../styles/map.style';
-import TemplateCards from './search-find/templates/TemplateCards';
 
 export default function MapOld(props: any) {
-
-  const [region, setRegion] = React.useState({ latitudeDelta: 0, latitude: 0, longitudeDelta: 0, longitude: 0 });
-
-  const [longitude, setLongitude] = React.useState(0)
-
-  const [latitude, setLatitude] = React.useState(0)
-
-  const [isTracking, setIsTracking] = React.useState(true);
-
-  const [isTrackingRoute, setIsTrackingRoute] = React.useState(true);
-
+  console.log('teste==>')
   let poly: PolylineModel[] = []
+  const [region, setRegion] = React.useState({ latitudeDelta: 0, latitude: 0, longitudeDelta: 0, longitude: 0 });
+  const [longitude, setLongitude] = React.useState(0)
+  const [newLong, setNewLong] = React.useState(0)
+  const [newLat, setNewLat] = React.useState(0)
+  const [latitude, setLatitude] = React.useState(0)
+  const [isTracking, setIsTracking] = React.useState(true);
+  const [isTrackingRoute, setIsTrackingRoute] = React.useState(true);
   const [routes, setRoutes] = React.useState(poly)
 
   React.useEffect(() => {
@@ -27,10 +25,8 @@ export default function MapOld(props: any) {
       navigator.geolocation.getCurrentPosition(
         position => {
           setRegion({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0,
-            longitudeDelta: 0
+            latitude: position.coords.latitude,longitude: position.coords.longitude,
+            latitudeDelta: 0,longitudeDelta: 0
           });
           setIsTracking(false)
         },
@@ -52,18 +48,15 @@ export default function MapOld(props: any) {
   }
   let polyline: PolylineModel[] = []
   const MappingDirection = () => {
-    console.log(props.route.params)
 
-    debugger
     const { origin, destiny, price, rating, kilometers, information } = props.route.params;
+    if (isTrackingRoute && routes.length > 0) {
 
     React.useEffect(() => {
-
-      if (routes.length == 0) {
         Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
           "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
           .then(response => {
-            if (response.data != null) {
+            if (response.data != null && response.data != undefined) {
               response.data.forEach((element: any) => {
                 let ele: PolylineModel = {
                   latitude: element.lat,
@@ -76,8 +69,18 @@ export default function MapOld(props: any) {
             if (isTrackingRoute)
               setRoutes(polyline)
           });
-      }
     }, [isTrackingRoute, routes])
+  }
+
+    const setNewMarker = (c: any) => {
+      setNewLong(c.lng)
+      setNewLat(c.lat)
+      setIsTracking(false)
+      setRoutes(routes)
+      
+
+      console.log('set new marker', c)
+    }
 
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
@@ -92,7 +95,7 @@ export default function MapOld(props: any) {
         <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>
       </MapView>
       <View style={mapStyle.placesContainer}>
-      <TemplateCards origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
+      <TemplateCards newMarker={(c:any)=> setNewMarker(c) } origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
       </View>
     </View>
   }

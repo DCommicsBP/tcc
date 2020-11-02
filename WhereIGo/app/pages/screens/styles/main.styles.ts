@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { getNewDimensions, dimensionsMain, getNewPosition } from "../../../app/utils/dimansions/dimansions";
+import { getNewDimensions, dimensionsMain, getNewPosition } from "../../../utils/dimansions/dimansions";
 
 const imagePosition = getNewPosition(17,0,30)
 

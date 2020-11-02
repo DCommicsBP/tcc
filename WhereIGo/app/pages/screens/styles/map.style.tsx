@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { getNewDimensions } from "../../utils/dimansions/dimansions";
+import { getNewDimensions } from "../../../utils/dimansions/dimansions";
 
 const { height, width } = Dimensions.get('window');
 const newMapDimensions = getNewDimensions(90, 85)

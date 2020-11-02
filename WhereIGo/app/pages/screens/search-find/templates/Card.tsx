@@ -7,6 +7,7 @@ import { Popup } from 'react-native-map-link'
 import { cardStyles } from "../styles/card.styles";
 
 export default function Card(props: any) {
+    console.log('CCCC', props)
     const [isVisible, setIsVisible] = React.useState(false);
     let model: PlaceSearchModel = {
         address: props.props.address,
@@ -24,6 +25,12 @@ export default function Card(props: any) {
 
     }
 
+    const setMark = (c: any)=>{
+        props.coordinates(c); 
+        console.log('coordinates', c)
+
+
+    }
     const Modal2 = () => {
         console.log('entrei no popup')
         return <View style={cardStyles.centeredView}>
@@ -57,17 +64,39 @@ export default function Card(props: any) {
         <Text style={cardStyles.text}>{model.name}</Text>
         <Text>{model.address ? model.address + '-' : ''} {model.city} {model.state && model.city ? ' - ' + model.state : model.state}</Text>
         <Text>{model.phone}</Text>
-        <View>
-            <TouchableOpacity style={{ alignContent: 'center' }} onPress={() => setIsVisible(!isVisible)} >
-                <Text>Traçar rota no GPS</Text>
-                {isVisible == true ? Modal2() : <Text></Text>}
+        <View style={{flexDirection: 'row', width:180, right:25, margin: 10, top: 20}}>
+            <TouchableOpacity style={style.buttons} onPress={() => setIsVisible(!isVisible)} >
+                <Text style={style.textButtons}>Traçar rota no GPS</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Text>Mostrar rota no aplicativo</Text>
+
+            <TouchableOpacity style={style.buttons}>
+                <Text style ={style.textButtons}  onPress={()=> setMark(model.coordinates)}>Exibir no mapa</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Text>Visualizar Detalhes do lugar</Text>
+            <TouchableOpacity style={style.buttons}>
+                <Text style={style.textButtons}>Visualizar Detalhes </Text>
             </TouchableOpacity>
+            {isVisible == true ? Modal2() : <Text></Text>}
         </View>
     </View>
 }
+
+const style = StyleSheet.create({
+
+    textButtons: {
+        fontFamily: 'monospace',
+        fontSize: 12, textAlign:'center'
+
+    }, 
+
+
+  buttons:{
+    width: 110, 
+    padding: 5, margin: 5,
+    borderBottomLeftRadius: 10, 
+    borderBottomRightRadius: 10, 
+    borderTopLeftRadius: 10, 
+    borderTopRightRadius: 10,
+    borderColor: "#999", 
+    borderWidth: 5
+  }
+})
