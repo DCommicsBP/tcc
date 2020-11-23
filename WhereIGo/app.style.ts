@@ -2,7 +2,6 @@
 import { StyleSheet, StyleProp, TextStyle } from "react-native";
 import { getNewDimensions, dimensionsMain, getNewPosition } from "./app/utils/dimansions/dimansions";
 
-const imageDimensions = getNewDimensions(28.5, 30)
 const imagePosition = getNewPosition(17,0,30)
 export const appStyle = StyleSheet.create({
     backgoround: {

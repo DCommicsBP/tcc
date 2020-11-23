@@ -2,15 +2,14 @@ import Axios from 'axios';
 import * as React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps'
-import { set } from 'react-native-reanimated';
 import { PolylineModel } from '../../../models/polyline.model';
 import TemplateCards from '../search-find/templates/TemplateCards';
 import { mapStyle } from '../styles/map.style';
 
 export default function MapOld(props: any) {
-  console.log('teste==>')
   let poly: PolylineModel[] = []
-  const [region, setRegion] = React.useState({ latitudeDelta: 0, latitude: 0, longitudeDelta: 0, longitude: 0 });
+  const [region, setRegion] = React.useState({ latitudeDelta: 0, latitude: 0, 
+    longitudeDelta: 0, longitude: 0 });
   const [longitude, setLongitude] = React.useState(0)
   const [newLong, setNewLong] = React.useState(0)
   const [newLat, setNewLat] = React.useState(0)
@@ -84,6 +83,7 @@ export default function MapOld(props: any) {
 
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
+    
     return <View style={mapStyle.container}>
       <MapView
         style={mapStyle.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
@@ -94,7 +94,7 @@ export default function MapOld(props: any) {
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
         <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>
       </MapView>
-      <View style={mapStyle.placesContainer}>
+        <View style={mapStyle.placesContainer}>
       <TemplateCards newMarker={(c:any)=> setNewMarker(c) } origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
       </View>
     </View>
