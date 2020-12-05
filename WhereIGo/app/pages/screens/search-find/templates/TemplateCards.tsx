@@ -46,8 +46,8 @@ export default function TemplateCards(props: any) {
 
         })
 
-    }
-
+    }       
+    clearTimeout()
     gateSearch()
     return<ScrollView style={{}} horizontal pagingEnabled showsHorizontalScrollIndicator={false}  >
             {placesSearch.length > 0? placesSearch.map((element:any, index: number)=>{ 
