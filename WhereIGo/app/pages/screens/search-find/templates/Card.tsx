@@ -7,7 +7,6 @@ import { Popup } from 'react-native-map-link'
 import { cardStyles } from "../styles/card.styles";
 
 export default function Card(props: any) {
-    console.log('CCCC', props)
     const [isVisible, setIsVisible] = React.useState(false);
     let model: PlaceSearchModel = {
         address: props.props.address,

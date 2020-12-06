@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import useAxios from 'axios-hooks';
 import * as React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps'
@@ -16,7 +17,7 @@ export default function MapOld(props: any) {
   const [latitude, setLatitude] = React.useState(0)
   const [isTracking, setIsTracking] = React.useState(true);
   const [isTrackingRoute, setIsTrackingRoute] = React.useState(true);
-  const [routes, setRoutes] = React.useState(poly)
+  const [route, setRoute] = React.useState(poly)
 
   React.useEffect(() => {
     if (!isTracking) return;
@@ -49,41 +50,31 @@ export default function MapOld(props: any) {
   const MappingDirection = () => {
 
     const { origin, destiny, price, rating, kilometers, information } = props.route.params;
-    if (isTrackingRoute && routes.length > 0) {
-
-    React.useEffect(() => {
-        Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
+   
+    const loadRoute = function () {
+      const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
           "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
-          .then(response => {
-            if (response.data != null && response.data != undefined) {
-              response.data.forEach((element: any) => {
-                let ele: PolylineModel = {
+      if (route && !isTrackingRoute) {
+          let poly: PolylineModel[] = [];
+
+          setIsTrackingRoute(true);
+          data.forEach((element: any) => {
+              let ele: PolylineModel = {
                   latitude: element.lat,
                   longitude: element.lng
-                }
-                polyline.push(ele);
-              });
-              setIsTrackingRoute(false)
-            }
-            if (isTrackingRoute)
-              setRoutes(polyline)
-          });
-    }, [isTrackingRoute, routes])
+              }
+              poly.push(ele);
+              })
+              setRoute(poly)
+              console.log('route axios hooks',  route)
+      }
+      if(error) {
+          console.log('error route ==> ',  error)
+      }
   }
-
-    const setNewMarker = (c: any) => {
-      setNewLong(c.lng)
-      setNewLat(c.lat)
-      setIsTracking(false)
-      setRoutes(routes)
-      
-
-      console.log('set new marker', c)
-    }
-
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
-    
+    loadRoute(); 
     return <View style={mapStyle.container}>
       <MapView
         style={mapStyle.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
@@ -92,14 +83,13 @@ export default function MapOld(props: any) {
         }}>
         <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-        <Polyline coordinates={routes} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>
+        <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>
       </MapView>
         <View style={mapStyle.placesContainer}>
-      <TemplateCards newMarker={(c:any)=> setNewMarker(c) } origin={origin} destiny={destiny} routes={routes} price={price} rating={rating} kilometers={kilometers} information={information} />
+      <TemplateCards origin={origin} destiny={destiny} routes={route} price={price} rating={rating} kilometers={kilometers} information={information} />
       </View>
     </View>
   }
-
   if (typeof props.route != 'undefined')
     return <MappingDirection />
   else
