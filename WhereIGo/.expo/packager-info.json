@@ -1,10 +1,10 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 7564,
-  "expoServerNgrokUrl": "https://bd-qs7.anonymous.whereigo.exp.direct",
-  "packagerNgrokUrl": "https://packager.bd-qs7.anonymous.whereigo.exp.direct",
-  "ngrokPid": 5916,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

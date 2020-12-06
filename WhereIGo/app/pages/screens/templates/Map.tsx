@@ -54,7 +54,8 @@ export default function MapOld(props: any) {
     const loadRoute = function () {
       const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
           "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
-      if (route && !isTrackingRoute) {
+            debugger; 
+          if (route && !isTrackingRoute) {
           let poly: PolylineModel[] = [];
 
           setIsTrackingRoute(true);
@@ -83,7 +84,8 @@ export default function MapOld(props: any) {
         }}>
         <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-        <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>
+        
+      { route.length > 0? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>: <View></View> }
       </MapView>
         <View style={mapStyle.placesContainer}>
       <TemplateCards origin={origin} destiny={destiny} routes={route} price={price} rating={rating} kilometers={kilometers} information={information} />
