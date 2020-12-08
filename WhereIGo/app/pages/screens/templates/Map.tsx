@@ -56,7 +56,7 @@ export default function MapOld(props: any) {
           "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
       if (route && !isTrackingRoute) {
           let poly: PolylineModel[] = [];
-
+  
           setIsTrackingRoute(true);
           data.forEach((element: any) => {
               let ele: PolylineModel = {
