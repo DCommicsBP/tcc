@@ -54,7 +54,7 @@ export const cardStyles = StyleSheet.create({
         textAlign: "center"
     },
     modalText: {
-        marginBottom: 15,
+        marginBottom: 10,
         textAlign: "center"
     }
 

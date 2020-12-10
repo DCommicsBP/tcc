@@ -24,8 +24,8 @@ export default function Card(props: any) {
 
     }
 
-    const setMark = (c: any)=>{
-        props.coordinates(c); 
+    const setMark = (c: any) => {
+        props.coordinates(c);
         console.log('coordinates', c)
 
 
@@ -63,17 +63,11 @@ export default function Card(props: any) {
         <Text style={cardStyles.text}>{model.name}</Text>
         <Text>{model.address ? model.address + '-' : ''} {model.city} {model.state && model.city ? ' - ' + model.state : model.state}</Text>
         <Text>{model.phone}</Text>
-        <View style={{flexDirection: 'row', width:180, right:25, margin: 10, top: 20}}>
+        <View style={{ flexDirection: 'row', width: 480, right: 25, margin: 10, top: 20 }}>
             <TouchableOpacity style={style.buttons} onPress={() => setIsVisible(!isVisible)} >
                 <Text style={style.textButtons}>Traçar rota no GPS</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={style.buttons}>
-                <Text style ={style.textButtons}  onPress={()=> setMark(model.coordinates)}>Exibir no mapa</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={style.buttons}>
-                <Text style={style.textButtons}>Visualizar Detalhes </Text>
-            </TouchableOpacity>
             {isVisible == true ? Modal2() : <Text></Text>}
         </View>
     </View>
@@ -83,19 +77,23 @@ const style = StyleSheet.create({
 
     textButtons: {
         fontFamily: 'monospace',
-        fontSize: 12, textAlign:'center'
+        fontSize: 12, textAlign: 'center'
 
-    }, 
+    },
 
 
-  buttons:{
-    width: 110, 
-    padding: 5, margin: 5,
-    borderBottomLeftRadius: 10, 
-    borderBottomRightRadius: 10, 
-    borderTopLeftRadius: 10, 
-    borderTopRightRadius: 10,
-    borderColor: "#999", 
-    borderWidth: 5
-  }
+    buttons: {
+        width: 210,
+        height: 40, 
+        left: '30%',
+        right: 0,   
+        padding: 5, margin: 5,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderColor: "#999",
+        borderWidth: 2,
+
+    }
 })
