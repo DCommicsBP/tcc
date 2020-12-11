@@ -1,11 +1,10 @@
 import { Text, View } from "react-native";
 import * as React from 'react';
-import Axios from "axios";
 import useAxios from 'axios-hooks'
 import PlaceSearchModel from "../../../../models/place.search.model";
 import Card from "./Card";
 import { ScrollView } from "react-native-gesture-handler";
-import { PolylineModel } from "../../../../models/polyline.model";
+import Axios from "axios";
 
 export default function TemplateCards(props: any) {
 
@@ -24,34 +23,63 @@ export default function TemplateCards(props: any) {
         props.newMarker(c)
         console.log('cooordinates template ===> ', c)
     }
-
-
-    const loadData = function () {
+    const loadPlaces = function () {
         let inf = '';
         information.forEach((element: any) => {
             inf += element + ","
         });
-        const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/search-places-controller/places-service/" + inf.substring(0, inf.length - 1) + "/" + origin.lat + "/" + origin.lng + "/" + destiny.lat + "/" + destiny.lng + "/" + kilometers)
-  
-        if (loading) {
-            return <View style={{ flex: 1 }}><Text> Teste ...</Text></View>
-        }
-  
-        if (data && !placesBreak) {
-            debugger; 
-            setPlacesBreak(true)
-            setPlacesSearch(data)
-            console.log('data do use axioa ==>', data)
-        }
-  
-        if (error) {
-            return <View style={{ flex: 1 }}></View>
+        const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/search-places-controller/places-service/" + inf.substring(0, inf.length - 1) + "/" + origin.lng 
+        + "/" + origin.lat + "/" + destiny.lng + "/" + destiny.lat + "/" + kilometers)
+            if (data) {
+                let elements:any = []; 
+              data.forEach((element: any) => {
+                let ele: any = element;
+                elements.push(ele)
+                })
+                
+                setPlacesSearch(elements)
+                setPlacesBreak(true);
+                
+                console.log('route axios hooks',  route)
+      }
+        if(error) {
+            console.log('error places ==> ',  error)
         }
     }
+    /*
+    const gateSearch = () => {
+        React.useEffect(() => {
+            let inf = '';
+            information.forEach((element: any) => {
+                inf += element + ","
+            });
+            if(placesSearch.length > 0 && placesBreak) return; 
+            if(placesSearch.length <= 0){
 
-    loadData(); 
-  
-  return <ScrollView style={{}} horizontal pagingEnabled showsHorizontalScrollIndicator={false}  >
+            Axios.get("https://where-i-do-go-api-google-maps.herokuapp.com/search-places-controller/places-service/" + inf.substring(0, inf.length - 1) + "/" + origin.lng + "/" + origin.lat + "/" + destiny.lng + "/" + destiny.lat + "/" + kilometers)
+                .then(response => {
+                    console.log(response)
+                    let data = response.data as any[]
+                    if (response.data != null && placesSearch.length <=0) {
+                        setPlacesSearch(response.data)
+                        setPlacesBreak(true)
+                        return; 
+                    }
+                })
+                .catch(error => {
+                    console.log('ERRROOOOO', error)
+                    setMessage("Não foi possível encontrar as informações no momento. Aguarde mais um instante. ")
+                })
+            }
+
+        }, [])
+
+    }*/
+
+    if(placesSearch.length == 0)
+        loadPlaces(); 
+
+return <ScrollView style={{}} horizontal pagingEnabled showsHorizontalScrollIndicator={false}  >
         {placesSearch.length > 0 ? placesSearch.map((element: any, index: number) => {
             console.log('element', element)
             let place: PlaceSearchModel = {
