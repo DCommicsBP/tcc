@@ -51,7 +51,7 @@ loadRoute()
 
 }
  
-    return    <ScrollView style={{}} horizontal pagingEnabled showsHorizontalScrollIndicator={false}  >
+    return    <ScrollView style={{}} pagingEnabled showsHorizontalScrollIndicator={false}  >
     {placesSearch.length > 0 ? placesSearch.map((element: any, index: number) => {
         console.log('element', element)
         let place: PlaceSearchModel = {
@@ -69,44 +69,10 @@ loadRoute()
             isClosed: false
 
         }
-        return <Card key={index + ''} props={place} coordinates={(c: any) => setCoordinates(c)} />
+      //  return <Card key={index + ''} props={place} coordinates={(c: any) => setCoordinates(c)} />
     }) : <View><Text>nao deus</Text></View>}
 </ScrollView>;    
 
 }
 
-/*
-        if(placesBreak) return;joioioili9i              
-        const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/search-places-controller/places-service/"            + inf.substring(0, inf.length - 1) + "/" + origin.lng
-            + "/" + origin.lat + "/" + destiny.lng + "/" + destiny.lat + "/" + kilometers)
-
-        if (placesSearch.length == 0) {
-            if (data) {
-                let elements: any = [];
-                data.forEach((element: any) => {
-                    let ele: any = element;
-                    elements.push(ele)
-                    placesSearchModel.push(ele)
-                })
-
-                setPlacesSearch(elements)
-                setPlacesBreak(true);
-
-                console.log('route axios hooks teste  estado dos bagulho', placesSearch)
-
-
-            
-
-            }
-        }
-
-
-        if (error)
-            return <View><Text>Não deu!</Text></View>
-
-        if (loading) {
-
-            console.log('Está carregando !!!')
-            return <View><Text>Carregando !!!</Text></View>
-geyryhfy8guv vfd fb fr gtyu
-        }*/
+  

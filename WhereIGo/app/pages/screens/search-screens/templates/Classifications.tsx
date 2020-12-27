@@ -26,11 +26,10 @@ export default function Classifications(props: any) {
             </View>
             
             <View style={{ position: 'absolute', left: getNewDimensions(15, 0).width, flex: 0.5, top: '80%', width:'100%' }}>
-                {MainCustomButtonParameter('Mapa', 'Próximo ->', '#FFF', '#AAA', { ...props.route.params, rating })}
+                {MainCustomButtonParameter('Sugestões', 'Próximo ->', '#FFF', '#AAA', { ...props.route.params, rating })}
                 {MainReturnButton('Início', 'Retornar', '#CCC', '#FFF')}
             </View>
             
         </View>
     );
-
 }

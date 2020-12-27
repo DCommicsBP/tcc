@@ -52,9 +52,7 @@ export default function ConfigPlace() {
         console.log(require.type)
     }
 
-    return (
-
-        <View style={configurationStyle.principal}>
+    return (<View style={configurationStyle.principal}>
             <View style={configurationStyle.searchView}>
                 <View>
                     <Text style={configurationStyle.title}>Origem</Text>

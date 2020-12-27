@@ -7,6 +7,7 @@ import Informations from '../pages/screens/search-screens/templates/Informations
 import Classifications from '../pages/screens/search-screens/templates/Classifications';
 import ConfigPlace from '../pages/screens/search-screens/templates/Configurations';
 import Map from '../pages/screens/templates/Map';
+import TemplateCards from '../pages/screens/search-screens/templates/TemplateCards';
 
 
 const Stack = createStackNavigator();
@@ -20,7 +21,7 @@ export default function SearchRoutes (){
             <Stack.Screen name="Informações" component={Informations} />
             <Stack.Screen name="Classificação" component={Classifications} />
             <Stack.Screen name="Mapa" component={Map} />
-          </Stack.Navigator>
-  
+            <Stack.Screen name="Sugestões" component={TemplateCards} />
+            </Stack.Navigator>
       );
 }

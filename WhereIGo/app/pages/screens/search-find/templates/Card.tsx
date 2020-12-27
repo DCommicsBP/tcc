@@ -5,6 +5,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import PlaceSearchModel from "../../../../models/place.search.model";
 import { Popup } from 'react-native-map-link'
 import { cardStyles } from "../styles/card.styles";
+import MapOld from '../../templates/Map'
+import { useNavigation } from "@react-navigation/native";
 
 export default function Card(props: any) {
     const [isVisible, setIsVisible] = React.useState(false);
@@ -59,6 +61,11 @@ export default function Card(props: any) {
         </View>
     }
 
+    function showLocationInMap(modelCard:PlaceSearchModel) {
+        
+    }
+    const navigate = useNavigation()
+    
     return <View style={cardStyles.place}>
         <Text style={cardStyles.text}>{model.name}</Text>
         <Text>{model.address ? model.address + '-' : ''} {model.city} {model.state && model.city ? ' - ' + model.state : model.state}</Text>
@@ -66,6 +73,9 @@ export default function Card(props: any) {
         <View style={{ flexDirection: 'row', width: 480, right: 25, margin: 10, top: 20 }}>
             <TouchableOpacity style={style.buttons} onPress={() => setIsVisible(!isVisible)} >
                 <Text style={style.textButtons}>Traçar rota no GPS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={style.buttons} onPress={() => navigate.navigate("/teste", { ...props.route.params, model }) }>
+                <Text style={style.textButtons}>Mostrar rota no mapa</Text>
             </TouchableOpacity>
 
             {isVisible == true ? Modal2() : <Text></Text>}

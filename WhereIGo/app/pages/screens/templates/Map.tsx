@@ -9,15 +9,17 @@ import { mapStyle } from '../styles/map.style';
 
 export default function MapOld(props: any) {
   let poly: PolylineModel[] = []
-  const [region, setRegion] = React.useState({ latitudeDelta: 0, latitude: 0, 
-    longitudeDelta: 0, longitude: 0 });
+  const [region, setRegion] = React.useState({
+    latitudeDelta: 0, latitude: 0,
+    longitudeDelta: 0, longitude: 0
+  });
   const [longitude, setLongitude] = React.useState(0)
-  const [places, setPlaces] = React.useState(0)
-  const [newLat, setNewLat] = React.useState(0)
   const [latitude, setLatitude] = React.useState(0)
   const [isTracking, setIsTracking] = React.useState(true);
   const [isTrackingRoute, setIsTrackingRoute] = React.useState(false);
+  const [isTrackingAlternativeRoute, setIsTrackingAlternativeRoute] = React.useState(false);
   const [route, setRoute] = React.useState(poly)
+  const [alternativeRoute, setAlternativeRoute] = React.useState(poly)
 
   React.useEffect(() => {
     if (!isTracking) return;
@@ -25,8 +27,8 @@ export default function MapOld(props: any) {
       navigator.geolocation.getCurrentPosition(
         position => {
           setRegion({
-            latitude: position.coords.latitude,longitude: position.coords.longitude,
-            latitudeDelta: 0,longitudeDelta: 0
+            latitude: position.coords.latitude, longitude: position.coords.longitude,
+            latitudeDelta: 0, longitudeDelta: 0
           });
           setIsTracking(false)
         },
@@ -49,51 +51,76 @@ export default function MapOld(props: any) {
   let polyline: PolylineModel[] = []
   const MappingDirection = () => {
 
-    const { origin, destiny, price, rating, kilometers, information } = props.route.params;
-   
+    const { origin, destiny, price, rating, kilometers, information, model } = props.route.params;
+
     const loadRoute = function () {
       const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
-          "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
-          if (data) {
-          let poly: PolylineModel[] = [];
-            data.forEach((element: any) => {
-              let ele: PolylineModel = {
-                  latitude: element.lat,
-                  longitude: element.lng
-              }
-              poly.push(ele);
-              })
-              
-              setRoute(poly)
-              setIsTrackingRoute(true);
-              
-              console.log('route axios hooks',  route)
+        "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + destiny.lat + "&lngDestiny=" + destiny.lng + "&travelMode=driving")
+      if (data) {
+        let poly: PolylineModel[] = [];
+        data.forEach((element: any) => {
+          let ele: PolylineModel = {
+            latitude: element.lat,
+            longitude: element.lng
+          }
+          poly.push(ele);
+        })
+
+        setRoute(poly)
+        setIsTrackingRoute(true);
+
+        console.log('route axios hooks', route)
+      }
+
+      if (error) {
+        console.log('error route ==> ', error)
+      }
     }
 
-      if(error) {
-          console.log('error route ==> ',  error)
+    const loadAlternativeRoute = function (model: any) {
+      const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
+        "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + model.coordinates.lat + "&lngDestiny=" + model.coordinates.lng + "&travelMode=driving")
+      if (data) {
+        let poly: PolylineModel[] = [];
+        data.forEach((element: any) => {
+          let ele: PolylineModel = {
+            latitude: element.lat,
+            longitude: element.lng
+          }
+          poly.push(ele);
+        })
+
+        setAlternativeRoute(poly)
+        setIsTrackingAlternativeRoute(true);
+
+        console.log('route axios hooks', route)
       }
-  }
+
+      if (error) {
+        console.log('error route ==> ', error)
+      }
+    }
 
     setLatitude((origin.lat + destiny.lat) / 2);
     setLongitude((origin.lng + destiny.lng) / 2);
-    if(!isTrackingRoute)
+    if (!isTrackingRoute)
       loadRoute();
+    if(isTrackingAlternativeRoute)
+      loadAlternativeRoute(model)
 
     return <View style={mapStyle.container}>
       <MapView
-        style={mapStyle.mapView} maxZoomLevel={7} minZoomLevel={2} showsUserLocation scrollEnabled={false}
+        style={mapStyle.mapView} maxZoomLevel={14} minZoomLevel={2} showsUserLocation scrollEnabled={false}
         region={{
           latitude: latitude, longitude: longitude, latitudeDelta: 0.05, longitudeDelta: 0.02
         }}>
         <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-        
-      { route.length > 0? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E8868"}/>: <View></View> }
+        <Marker pinColor={"#AF6700"} coordinate={{ latitude: model.coordinate.lat, longitude: model.coordinate.lat }} />
+
+        {route.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E8868"} /> : <View></View>}
+        {alternativeRoute.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E7677"} /> : <View></View>}
       </MapView>
-        <View style={mapStyle.placesContainer}>
-      <TemplateCards origin={origin} destiny={destiny} routes={route} price={price} rating={rating} kilometers={kilometers} information={information} />
-      </View>
     </View>
   }
   if (typeof props.route != 'undefined')
