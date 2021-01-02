@@ -24,7 +24,6 @@ export default function Informations(props: any) {
         })
     });
 
-    console.log(information)
     return <View style={informationsStyle.main}>
         <View style={informationsStyle.viewTitle}>
             <Text style={informationsStyle.title}>

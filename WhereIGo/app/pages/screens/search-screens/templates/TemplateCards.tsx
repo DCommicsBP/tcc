@@ -12,7 +12,7 @@ export default function TemplateCards(props: any) {
     let breakPlaces: boolean = false;
 
     let placesSearch: any[] = [];
-    const { origin, destiny, price, rating, kilometers, information } = props
+    const { origin, destiny, price, rating, kilometers, information } = props.route.params
 
     const loadPlaces = function () {
         let inf = '';
@@ -50,7 +50,6 @@ export default function TemplateCards(props: any) {
         
     return (<ScrollView style={{}} pagingEnabled showsVerticalScrollIndicator={false}  >
         {placesSearch.length > 0 ? placesSearch.map((element: any, index: number) => {
-            console.log('element', element)
             let place: PlaceSearchModel = {
                 address: element.address,
                 cep: element.cep,
@@ -66,7 +65,8 @@ export default function TemplateCards(props: any) {
                 isClosed: false
 
             }
-            return <Card key={index + ''} props={place} />
+            console.log('places ===> ',place)
+            return <Card key={index + ''} props={{...place, origin, destiny}} />
         }) : <View></View>}
     </ScrollView>
     )

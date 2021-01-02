@@ -9,6 +9,7 @@ import MapOld from '../../templates/Map'
 import { useNavigation } from "@react-navigation/native";
 
 export default function Card(props: any) {
+    console.log('places no card ===> ', props)
     const [isVisible, setIsVisible] = React.useState(false);
     let model: PlaceSearchModel = {
         address: props.props.address,
@@ -28,12 +29,10 @@ export default function Card(props: any) {
 
     const setMark = (c: any) => {
         props.coordinates(c);
-        console.log('coordinates', c)
 
 
     }
     const Modal2 = () => {
-        console.log('entrei no popup')
         return <View style={cardStyles.centeredView}>
             <Modal
                 animationType="slide"
@@ -74,7 +73,7 @@ export default function Card(props: any) {
             <TouchableOpacity style={style.buttons} onPress={() => setIsVisible(!isVisible)} >
                 <Text style={style.textButtons}>Traçar rota no GPS</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={style.buttons} onPress={() => navigate.navigate("/teste", { ...props.route.params, model }) }>
+            <TouchableOpacity style={style.buttons} onPress={() => navigate.navigate("Mapa", { ...props.props, model }) }>
                 <Text style={style.textButtons}>Mostrar rota no mapa</Text>
             </TouchableOpacity>
 

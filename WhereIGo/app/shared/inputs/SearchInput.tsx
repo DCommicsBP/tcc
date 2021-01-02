@@ -4,7 +4,6 @@ import LocationModel from '../../models/location.model';
 
 export default function SearchInput (props: any) {
   let values = Object.keys(props).map(key => props[key]);
-  console.log(values)
   
   let numberValue = 0; 
    if ( values[0] == 'top'){
@@ -29,8 +28,6 @@ export default function SearchInput (props: any) {
           props.onSubmit(details)
           details?.geometry
           // 'details' is provided when fetchDetails = true
-          console.log('lat ===> ',  details?.geometry.location.lat);
-          console.log('lng ===> ',  details?.geometry.location.lng);
           let locationModel: LocationModel = {
             lat: details?.geometry.location.lat, 
             lng: details?.geometry.location.lng

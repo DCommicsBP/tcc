@@ -13,7 +13,6 @@ export default function Kilometers(props: any) {
 
     const [kilometrs, setKilometrs] = useState("5")
 
-    console.log('props kilometers', props)
     return <View style={kilometrsStyle.mainView}>
         <View style={kilometrsStyle.content}>
             <Text style={kilometrsStyle.describe}>

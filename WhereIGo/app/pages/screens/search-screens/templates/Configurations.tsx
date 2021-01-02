@@ -48,8 +48,6 @@ export default function ConfigPlace() {
             setTextInputValueOrigin(object.displayName)
             setRequire(new LocalSearchModel())
         }
-        console.log(object)
-        console.log(require.type)
     }
 
     return (<View style={configurationStyle.principal}>

@@ -1,13 +1,12 @@
-import Axios from 'axios';
 import useAxios from 'axios-hooks';
 import * as React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps'
 import { PolylineModel } from '../../../models/polyline.model';
-import TemplateCards from '../search-find/templates/TemplateCards';
 import { mapStyle } from '../styles/map.style';
 
-export default function MapOld(props: any) {
+export default function Map(props: any) {
+  console.log('map props===>', props)
   let poly: PolylineModel[] = []
   const [region, setRegion] = React.useState({
     latitudeDelta: 0, latitude: 0,
@@ -51,7 +50,7 @@ export default function MapOld(props: any) {
   let polyline: PolylineModel[] = []
   const MappingDirection = () => {
 
-    const { origin, destiny, price, rating, kilometers, information, model } = props.route.params;
+    const { origin, destiny, coordinates, model } = props.route.params;
 
     const loadRoute = function () {
       const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
@@ -69,17 +68,16 @@ export default function MapOld(props: any) {
         setRoute(poly)
         setIsTrackingRoute(true);
 
-        console.log('route axios hooks', route)
       }
 
       if (error) {
-        console.log('error route ==> ', error)
       }
     }
 
     const loadAlternativeRoute = function (model: any) {
+      debugger; 
       const [{ data, loading, error }, refetch] = useAxios("https://where-i-do-go-api-google-maps.herokuapp.com/osmr/get-route-coordinates-route/{latOrign}/{lngOrigin}/{latDestiny}/{lngDestiny}?" +
-        "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + model.coordinates.lat + "&lngDestiny=" + model.coordinates.lng + "&travelMode=driving")
+        "latOrign=" + origin.lat + "&lngOrigin=" + origin.lng + "&latDestiny=" + coordinates.lat + "&lngDestiny=" + coordinates.lng + "&travelMode=driving")
       if (data) {
         let poly: PolylineModel[] = [];
         data.forEach((element: any) => {
@@ -93,11 +91,9 @@ export default function MapOld(props: any) {
         setAlternativeRoute(poly)
         setIsTrackingAlternativeRoute(true);
 
-        console.log('route axios hooks', route)
       }
 
       if (error) {
-        console.log('error route ==> ', error)
       }
     }
 
@@ -105,21 +101,21 @@ export default function MapOld(props: any) {
     setLongitude((origin.lng + destiny.lng) / 2);
     if (!isTrackingRoute)
       loadRoute();
-    if(isTrackingAlternativeRoute)
+    if(!isTrackingAlternativeRoute)
       loadAlternativeRoute(model)
 
     return <View style={mapStyle.container}>
       <MapView
-        style={mapStyle.mapView} maxZoomLevel={14} minZoomLevel={2} showsUserLocation scrollEnabled={false}
+        style={mapStyle.mapView} maxZoomLevel={14} minZoomLevel={2} showsUserLocation scrollEnabled={true}
         region={{
           latitude: latitude, longitude: longitude, latitudeDelta: 0.05, longitudeDelta: 0.02
         }}>
         <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-        <Marker pinColor={"#AF6700"} coordinate={{ latitude: model.coordinate.lat, longitude: model.coordinate.lat }} />
+        <Marker pinColor={"#8f1846"} coordinate={{ latitude: model.coordinates.lat, longitude: model.coordinates.lat }} />
 
-        {route.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E8868"} /> : <View></View>}
-        {alternativeRoute.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#9E7677"} /> : <View></View>}
+        {route.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#000"} /> : <View></View>}
+        {alternativeRoute.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#FF5500"} /> : <View></View>}
       </MapView>
     </View>
   }
