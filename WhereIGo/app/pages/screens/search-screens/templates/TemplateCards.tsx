@@ -31,7 +31,7 @@ export default function TemplateCards(props: any) {
                 places.push(ele);
             })
 
-            placesSearch = places;
+            placesSearch = places.reverse();
             breakPlaces = !breakPlaces;
 
         }

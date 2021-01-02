@@ -106,16 +106,15 @@ export default function Map(props: any) {
 
     return <View style={mapStyle.container}>
       <MapView
-        style={mapStyle.mapView} maxZoomLevel={14} minZoomLevel={2} showsUserLocation scrollEnabled={true}
+        style={mapStyle.mapView} maxZoomLevel={14} minZoomLevel={14} showsUserLocation scrollEnabled={true}
         region={{
-          latitude: latitude, longitude: longitude, latitudeDelta: 0.05, longitudeDelta: 0.02
+          latitude: model.coordinates.lat, longitude: model.coordinates.lng, latitudeDelta: 0.05, longitudeDelta: 0.02
         }}>
         <Marker pinColor={"#02534D"} coordinate={{ latitude: origin.lat, longitude: origin.lng }} />
         <Marker pinColor={"#AF6700"} coordinate={{ latitude: destiny.lat, longitude: destiny.lng }} />
-        <Marker pinColor={"#8f1846"} coordinate={{ latitude: model.coordinates.lat, longitude: model.coordinates.lat }} />
+        <Marker pinColor={"#8f1846"} coordinate={{ latitude: model.coordinates.lat, longitude: model.coordinates.lng }} />
 
-        {route.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#000"} /> : <View></View>}
-        {alternativeRoute.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#FF5500"} /> : <View></View>}
+        {route.length > 0 ? <Polyline coordinates={route} geodesic strokeWidth={5} strokeColor={"#4d9677"} /> : <View></View>}
       </MapView>
     </View>
   }

@@ -4,16 +4,13 @@ export const cardStyles = StyleSheet.create({
 
     place: {
         width: Dimensions.get('window').width - 40,
-        maxHeight: 200,
+        maxHeight: 135,
         backgroundColor: '#FFF',
         marginHorizontal: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20, 
-        padding: 20,
-        left: 20,
+        padding: 10,
         right: 0,
+        borderColor: "#CCC", 
+        borderWidth: 1
     },
     text: {
         fontFamily: 'monospace',
@@ -22,6 +19,8 @@ export const cardStyles = StyleSheet.create({
         color: "#444"
     },
     centeredView: {
+        fontFamily: 'monospace',
+
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
@@ -41,12 +40,6 @@ export const cardStyles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5
-    },
-    openButton: {
-        backgroundColor: "#F194FF",
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
     },
     textStyle: {
         color: "white",
